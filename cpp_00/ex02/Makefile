@@ -5,18 +5,18 @@
 #                                                     +:+ +:+         +:+      #
 #    By: yel-yaqi <yel-yaqi@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
-#    Created: 2024/08/30 15:35:00 by yel-yaqi          #+#    #+#              #
-#    Updated: 2024/09/01 18:44:28 by yel-yaqi         ###   ########.fr        #
+#    Created: 2024/09/01 18:20:21 by yel-yaqi          #+#    #+#              #
+#    Updated: 2024/09/01 18:51:49 by yel-yaqi         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 CFLAGS = -Wall -Wextra -Werror -std=c++98
 
-SOURCES = pb.cpp Contact.cpp PhoneBook.cpp
+SOURCES = tests.cpp Account.cpp
 
-TARGET = pb
+TARGET = banker
 
-$(TARGET): $(SOURCES) PhoneBook.hpp Contact.hpp Makefile
+$(TARGET): $(SOURCES) Account.hpp Makefile
 	c++ $(SOURCES) $(CFLAGS) -o $@
 
 clear:
