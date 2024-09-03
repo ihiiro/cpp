@@ -6,7 +6,7 @@
 /*   By: yel-yaqi <yel-yaqi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/01 18:42:36 by yel-yaqi          #+#    #+#             */
-/*   Updated: 2024/09/02 19:38:32 by yel-yaqi         ###   ########.fr       */
+/*   Updated: 2024/09/03 01:19:15 by yel-yaqi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,11 @@
 #include <iostream>
 #include <ctime>
 
+int Account::_nbAccounts = 0;
+int Account::_totalAmount = 0;
+int Account::_totalNbDeposits = 0;
+int Account::_totalNbWithdrawals = 0;
+
 void Account::_displayTimestamp()
 {
 	std::time_t s_since_epoch = std::time(nullptr);
@@ -22,47 +27,27 @@ void Account::_displayTimestamp()
 	std::cout << "[" << std::put_time(local_time_obj, "%Y%m%d_%H%M%S") << "] ";
 }
 
-int remember_NbDeposits(int flag)
+int remember_index()
 {
-	static int d;
+	static int index = -1;
 
-	if (flag)
-		d += 1;
-	return (d);
-}
-
-int remember_NbWithdrawals(int flag)
-{
-	static int w;
-
-	if (flag)
-		w += 1;
-	return (w);
+	index += 1;
+	return (index);
 }
 
 int Account::getNbDeposits()
 {
-	return (remember_NbDeposits(0));
+	return (_totalNbDeposits);
 }
 
 int Account::getNbWithdrawals()
 {
-	return (remember_NbWithdrawals(0));
-	
-}
-
-int remember_NbAccounts(int flag)
-{
-	static int a;
-
-	if (flag)
-		a += 1;
-	return (a);
+	return (_totalNbWithdrawals);
 }
 
 int Account::getNbAccounts()
 {
-	return (remember_NbAccounts(0) + 1);
+	return (_nbAccounts);
 }
 
 int remember_total(int amount)
@@ -75,17 +60,47 @@ int remember_total(int amount)
 
 int Account::getTotalAmount()
 {
-	return (remember_total(0));
+	return (_totalAmount);
 }
 
 void Account::makeDeposit(int deposit)
 {
-	(void)deposit;
+	int amount = checkAmount();
+
+	_amount += deposit;
+	_nbDeposits += 1;
+	_totalNbDeposits += 1;
+	_totalAmount += deposit;
+	_displayTimestamp();
+	std::cout << "index:" << _accountIndex << ";";
+	std::cout << "p_amount:" << amount << ";";
+	std::cout << "deposit:" << deposit << ";";
+	std::cout << "amount:" << deposit + amount << ";";
+	std::cout << "nb_deposits:" << _nbDeposits << std::endl;
 }
 
 bool Account::makeWithdrawal(int withdrawal)
 {
-	return (withdrawal);
+	int amount = checkAmount();
+
+	_displayTimestamp();
+	std::cout << "index:" << _accountIndex << ";";
+	std::cout << "p_amount:" << amount << ";";
+	
+	std::cout << "withdrawal:";
+	if (withdrawal > _amount)
+	{
+		std::cout << "refused" << std::endl;
+		return (false);
+	}
+	std::cout << withdrawal << ";";
+	_amount -= withdrawal;
+	_totalAmount -= withdrawal;
+	_nbWithdrawals += 1;
+	_totalNbWithdrawals += 1;
+	std::cout << "amount:" << _amount << ";";
+	std::cout << "nb_withdrawals:" << _nbWithdrawals << std::endl;
+	return (true);
 }
 
 int Account::checkAmount() const
@@ -105,27 +120,19 @@ void Account::displayStatus() const
 void Account::displayAccountsInfos()
 {
 	_displayTimestamp();
-	std::cout << "accounts:" << getNbAccounts() - 1 << ";";
+	std::cout << "accounts:" << getNbAccounts() << ";";
 	std::cout << "total:" << getTotalAmount() << ";";
 	std::cout << "deposits:" << getNbDeposits() << ";";
 	std::cout << "withdrawals:" << getNbWithdrawals() << std::endl;
-}
-
-int remember_index_constr()
-{
-	static int index = -1;
-
-	index += 1;
-	return (index);
 }
 
 Account::Account(int initial_deposit)
 {
 	_amount = initial_deposit;
 
-	_accountIndex = remember_index_constr();
-	remember_NbAccounts(1);
-	remember_total(_amount);
+	_accountIndex = remember_index();
+	_nbAccounts += 1;
+	_totalAmount += _amount;
 	_displayTimestamp();
 	std::cout << "index:" << _accountIndex << ";";
 	std::cout << "amount:" << _amount << ";" << "created" << std::endl;
@@ -133,5 +140,9 @@ Account::Account(int initial_deposit)
 
 Account::~Account()
 {
-	
+	_nbAccounts += 1;
+	_totalAmount += _amount;
+	_displayTimestamp();
+	std::cout << "index:" << _accountIndex << ";";
+	std::cout << "amount:" << _amount << ";" << "closed" << std::endl;
 }
