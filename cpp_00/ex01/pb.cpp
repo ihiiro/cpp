@@ -6,7 +6,7 @@
 /*   By: yel-yaqi <yel-yaqi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/30 17:07:36 by yel-yaqi          #+#    #+#             */
-/*   Updated: 2024/09/01 17:18:35 by yel-yaqi         ###   ########.fr       */
+/*   Updated: 2024/09/04 17:42:54 by yel-yaqi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,18 +69,37 @@ void display_search_contact(Contact contact)
 	std::cout << "DARKEST SECRET: " << contact.get_ds() << "\n";
 }
 
+bool is_all_digits(std::string str)
+{
+	std::string::iterator	index_it_begin = str.begin();
+	std::string::iterator	index_it_end = str.end();
+
+	if (*index_it_begin == '\0')
+		return (false);
+	for (; index_it_begin != index_it_end; index_it_begin++)
+		if (*index_it_begin < 48 || *index_it_begin > 57)
+			return (false);
+	return (true);
+}
+
 int main()
 {
-	PhoneBook 	pb;
-	std::string info[5];
-	std::string	index;
-	Contact		search_contact;
+	PhoneBook 				pb;
+	std::string 			info[5];
+	std::string 			index;
+	
+	Contact					search_contact;
 
-	for (std::string action = ""; action != "EXIT";)
+	for (std::string action = ""; action != "EXIT";) //EOF
 	{
 		std::cout << "> ";
 		std::getline(std::cin, action);
-		if (action == "ADD")
+		if (std::cin.eof())
+		{
+			std::cout << "^D\n";
+			return (0);
+		}
+		if (action == "ADD") 
 		{
 			prompt_for_info(info);
 			pb.add_contact(info[0], info[1], info[2], info[3], info[4]);
@@ -90,11 +109,9 @@ int main()
 			display_contacts(pb.get_contacts());
 			std::cout << "INDEX > ";
 			std::getline(std::cin, index);
-			try { // what's this stuff??
-				search_contact = pb.search(std::stoi(index));
-			} catch (const std::invalid_argument& e) {
-				std::cerr << "Invalid argument to stoi\n";
-			}
+			if (!is_all_digits(index))
+				continue;
+			search_contact = pb.search(std::atoi(index.c_str()));
 			if (search_contact.get_fn() != "")
 				display_search_contact(search_contact);
 			else
