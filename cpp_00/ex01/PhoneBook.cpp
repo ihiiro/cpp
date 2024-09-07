@@ -6,7 +6,7 @@
 /*   By: yel-yaqi <yel-yaqi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/30 15:36:47 by yel-yaqi          #+#    #+#             */
-/*   Updated: 2024/09/01 17:23:14 by yel-yaqi         ###   ########.fr       */
+/*   Updated: 2024/09/07 16:45:33 by yel-yaqi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,12 +23,10 @@ void PhoneBook::add_contact(std::string fn, std::string ln,
 	if (fn.empty() || ln.empty() || nn.empty() || pn.empty() || ds.empty())
 		return;
 	if (index >= 8)
-		contacts[0] = Contact(fn, ln, nn, pn, ds);
+		contacts[index % 8] = Contact(fn, ln, nn, pn, ds);
 	else
-	{
 		contacts[index] = Contact(fn, ln, nn, pn, ds);
-		index += 1;
-	}
+	index += 1;
 }
 
 Contact *PhoneBook::get_contacts()
