@@ -6,7 +6,7 @@
 #    By: yel-yaqi <yel-yaqi@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/09/07 17:47:05 by yel-yaqi          #+#    #+#              #
-#    Updated: 2024/09/07 17:54:25 by yel-yaqi         ###   ########.fr        #
+#    Updated: 2024/09/09 23:12:06 by yel-yaqi         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -17,7 +17,7 @@ TARGET = uv
 SOURCES = main.cpp Weapon.cpp HumanA.cpp HumanB.cpp
 
 $(TARGET): $(SOURCES) Makefile
-	c++ main.cpp $(CFLAGS) -o $@
+	c++ $(SOURCES) $(CFLAGS) -o $@
 
 clear:
 	rm -f $(TARGET)
