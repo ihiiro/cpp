@@ -6,12 +6,11 @@
 /*   By: yel-yaqi <yel-yaqi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/13 22:14:55 by yel-yaqi          #+#    #+#             */
-/*   Updated: 2024/09/14 01:16:57 by yel-yaqi         ###   ########.fr       */
+/*   Updated: 2024/09/14 02:59:08 by yel-yaqi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "defines.hpp"
-#include <iostream>
 
 int return_err(int err_const)
 {
