@@ -6,7 +6,7 @@
 /*   By: yel-yaqi <yel-yaqi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/10 20:04:14 by yel-yaqi          #+#    #+#             */
-/*   Updated: 2024/09/14 04:33:24 by yel-yaqi         ###   ########.fr       */
+/*   Updated: 2024/09/14 05:15:23 by yel-yaqi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,13 +28,18 @@ int main(int argc, char **argv)
 		return (return_err(NULL_ARGS));
 	/* IMPORTANT CONSTANTS */
 	const size_t 				filename_char_size(std::strlen(argv[FIRST_ARG]));
-	// const size_t 				str_char_size(std::strlen(argv[SECOND_ARG]));
+	const size_t 				str_char_size(std::strlen(argv[SECOND_ARG]));
 	// const size_t 				str_replacer_char_size(std::strlen(argv[THIRD_ARG]));
 	const char suffix[] = 		".replace";
 	/* VALIDATE CONSTANTS AND READ FILE/CONSTRUCT FULL-CONTENT STRING */
 	if (filename_char_size + std::strlen(suffix) > MACOS_FILENAME_CHAR_MAX_LEN)
 		return(return_err(PRODUCT_FILENAME_TOO_LONG));
-	std::streamsize				file_char_size;
-	std::string 				full_char_content_str(return_aggregate_str(argv[FIRST_ARG], &file_char_size));
+	std::streamsize				file_char_size = 0;
+	std::string 				*full_char_content_str(return_aggregate_str(argv[FIRST_ARG], &file_char_size));
+	if (full_char_content_str == NULL)
+		return (return_err(FILE_DOES_NOT_EXIST));
+	if (str_char_size > (size_t)file_char_size)
+		return (return_err(FIRST_STRING_LARGER_THAN_FILE));
 
+	std::ofstream file("ff");
 }

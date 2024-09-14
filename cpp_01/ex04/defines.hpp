@@ -6,7 +6,7 @@
 /*   By: yel-yaqi <yel-yaqi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/13 22:05:07 by yel-yaqi          #+#    #+#             */
-/*   Updated: 2024/09/14 03:10:34 by yel-yaqi         ###   ########.fr       */
+/*   Updated: 2024/09/14 04:55:40 by yel-yaqi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,6 +28,8 @@
 # define 		NULL_ARGS 						1
 # define 		ERR_RETURN_CONSTANT 			2
 # define 		PRODUCT_FILENAME_TOO_LONG		3
+# define 		FIRST_STRING_LARGER_THAN_FILE 	4
+# define		FILE_DOES_NOT_EXIST				5
 
 /* MACOS CONSTANTS */
 # define 		MACOS_FILENAME_CHAR_MAX_LEN 	255
