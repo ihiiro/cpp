@@ -6,15 +6,15 @@
 #    By: yel-yaqi <yel-yaqi@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/09/10 20:03:52 by yel-yaqi          #+#    #+#              #
-#    Updated: 2024/09/14 05:05:35 by yel-yaqi         ###   ########.fr        #
+#    Updated: 2024/09/15 15:19:39 by yel-yaqi         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 CFLAGS = -std=c++98 -g
 
-SOURCES = main.cpp return_err.cpp return_aggregate_str.cpp
+SOURCES = main.cpp return_err.cpp return_aggregate_str.cpp return_occurence_count.cpp
 
-HEADERS = defines.hpp
+HEADERS = defines.hpp return_aggregate_str.hpp return_err.hpp return_occurence_count.hpp
 
 TARGET = sed
 
