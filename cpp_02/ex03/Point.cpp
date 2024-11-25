@@ -6,7 +6,7 @@
 /*   By: yel-yaqi <yel-yaqi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/24 23:44:21 by yel-yaqi          #+#    #+#             */
-/*   Updated: 2024/11/25 15:31:27 by yel-yaqi         ###   ########.fr       */
+/*   Updated: 2024/11/25 19:22:05 by yel-yaqi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,4 +36,14 @@ Point& Point::operator= (const Point &f)
 Point::~Point()
 {
 	
+}
+
+Fixed Point::getx() const
+{
+	return x;
+}
+
+Fixed Point::gety() const
+{
+	return y;
 }

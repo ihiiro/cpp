@@ -6,7 +6,7 @@
 /*   By: yel-yaqi <yel-yaqi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/04 17:09:01 by yel-yaqi          #+#    #+#             */
-/*   Updated: 2024/11/24 20:25:52 by yel-yaqi         ###   ########.fr       */
+/*   Updated: 2024/11/25 19:19:09 by yel-yaqi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,8 +57,6 @@ class Fixed
 		int toInt () const;
 
 		~Fixed ();
-
-		friend std::ostream& operator<< (std::ostream &out, Fixed const &fp);
-
 };
 
+std::ostream& operator<< (std::ostream &out, Fixed const &fp);

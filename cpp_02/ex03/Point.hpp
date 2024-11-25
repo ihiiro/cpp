@@ -6,7 +6,7 @@
 /*   By: yel-yaqi <yel-yaqi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/24 23:44:23 by yel-yaqi          #+#    #+#             */
-/*   Updated: 2024/11/25 17:10:25 by yel-yaqi         ###   ########.fr       */
+/*   Updated: 2024/11/25 19:21:42 by yel-yaqi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,6 +25,10 @@ class Point
 		Point(const Point& p);
 		// assignment
 		Point& operator= (const Point &f);
-		friend bool bsp( Point const a, Point const b, Point const c, Point const point);
+		//
+		Fixed getx() const;
+		Fixed gety() const;
 		~Point();
 };
+
+bool bsp( Point const a, Point const b, Point const c, Point const point);
