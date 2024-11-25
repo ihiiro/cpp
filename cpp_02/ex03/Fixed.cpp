@@ -6,7 +6,7 @@
 /*   By: yel-yaqi <yel-yaqi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/04 17:09:15 by yel-yaqi          #+#    #+#             */
-/*   Updated: 2024/11/25 16:48:49 by yel-yaqi         ###   ########.fr       */
+/*   Updated: 2024/11/25 16:49:52 by yel-yaqi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,7 +40,7 @@ double poww(double base, double exp)
 Fixed::Fixed()
 {
 	fixed = 0;
-	std::cout << "Default constructor called" << std::endl;
+	// std::cout << "Default constructor called" << std::endl;
 }
 
 Fixed::Fixed(const Fixed &f)
@@ -49,35 +49,35 @@ Fixed::Fixed(const Fixed &f)
 		this->fixed = 0;
 	else
 		*this = f;
-	std::cout << "Copy constructor called" << std::endl;
+	// std::cout << "Copy constructor called" << std::endl;
 }
 
 Fixed::~Fixed()
 {
-	std::cout << "Destructor called" << std::endl;
+	// std::cout << "Destructor called" << std::endl;
 }
 
 int Fixed::getRawBits() const
 {
-	std::cout << "getRawBits member function called" << std::endl;
+	// std::cout << "getRawBits member function called" << std::endl;
 	return fixed;
 }
 
 void Fixed::setRawBits(int const raw)
 {
 	fixed = raw;
-	std::cout << "setRawBits member function called" << std::endl;
+	// std::cout << "setRawBits member function called" << std::endl;
 }
 
 Fixed::Fixed(int const i)
 {
-	std::cout << "Int constructor called" << std::endl;
+	// std::cout << "Int constructor called" << std::endl;
 	fixed = i << frac;
 }
 
 Fixed::Fixed(float const f)
 {
-	std::cout << "Float constructor called" << std::endl;
+	// std::cout << "Float constructor called" << std::endl;
 	fixed = roundf(f * poww(2, frac));
 }
 
@@ -133,7 +133,7 @@ Fixed& Fixed::operator=(const Fixed &f)
 {
 	if (this != &f)
 		this->fixed = f.getRawBits();
-	std::cout << "Copy assignment operator called" << std::endl;
+	// std::cout << "Copy assignment operator called" << std::endl;
 	return *this;
 }
 
