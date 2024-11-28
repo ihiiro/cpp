@@ -6,7 +6,7 @@
 /*   By: yel-yaqi <yel-yaqi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/04 17:09:03 by yel-yaqi          #+#    #+#             */
-/*   Updated: 2024/11/18 17:05:43 by yel-yaqi         ###   ########.fr       */
+/*   Updated: 2024/11/28 09:35:59 by yel-yaqi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@
 int main( void )
 {
 	Fixed a;
-	Fixed const b( 10 );
+	Fixed const b( 2147483647 );
 	Fixed const c( 42.42f );
 	Fixed const d( b );
 	a = Fixed( 1234.4321f );
@@ -32,3 +32,9 @@ int main( void )
 	
 	return 0;
 }
+
+// sum of integer geometric series: (1 - b ** N ) / (1-b)
+// sum of fractional geometric series: -(1 - b**-n) / (1-b)
+
+// 	Q23.8 min: -8388608
+// Q23.8 max: 8388607.99609375

@@ -6,12 +6,15 @@
 /*   By: yel-yaqi <yel-yaqi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/04 17:09:01 by yel-yaqi          #+#    #+#             */
-/*   Updated: 2024/11/25 19:17:53 by yel-yaqi         ###   ########.fr       */
+/*   Updated: 2024/11/28 09:22:03 by yel-yaqi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #pragma once
 #include <iostream>
+
+# define Q23_8_MIN -8388608
+# define Q23_8_MAX 8388607.99609375
 
 class Fixed
 {

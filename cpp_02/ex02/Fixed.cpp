@@ -6,7 +6,7 @@
 /*   By: yel-yaqi <yel-yaqi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/04 17:09:15 by yel-yaqi          #+#    #+#             */
-/*   Updated: 2024/11/25 16:48:49 by yel-yaqi         ###   ########.fr       */
+/*   Updated: 2024/11/28 09:21:45 by yel-yaqi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,13 +72,23 @@ void Fixed::setRawBits(int const raw)
 Fixed::Fixed(int const i)
 {
 	std::cout << "Int constructor called" << std::endl;
-	fixed = i << frac;
+	if (i > Q23_8_MAX)
+		fixed = roundf(Q23_8_MAX * poww(2, frac));
+	else if (i < Q23_8_MIN)
+		fixed = Q23_8_MIN * poww(2, frac);
+	else
+		fixed = i << frac;
 }
 
 Fixed::Fixed(float const f)
 {
 	std::cout << "Float constructor called" << std::endl;
-	fixed = roundf(f * poww(2, frac));
+	if (f > Q23_8_MAX)
+		fixed = roundf(Q23_8_MAX * poww(2, frac));
+	else if (f < Q23_8_MIN)
+		fixed = Q23_8_MIN * poww(2, frac);
+	else
+		fixed = roundf(f * poww(2, frac));
 }
 
 float Fixed::toFloat() const
