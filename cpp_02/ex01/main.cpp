@@ -6,7 +6,7 @@
 /*   By: yel-yaqi <yel-yaqi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/04 17:09:03 by yel-yaqi          #+#    #+#             */
-/*   Updated: 2024/11/28 09:35:59 by yel-yaqi         ###   ########.fr       */
+/*   Updated: 2024/11/30 18:30:57 by yel-yaqi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@
 int main( void )
 {
 	Fixed a;
-	Fixed const b( 2147483647 );
+	Fixed const b( 10 );
 	Fixed const c( 42.42f );
 	Fixed const d( b );
 	a = Fixed( 1234.4321f );

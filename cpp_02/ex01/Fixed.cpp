@@ -6,7 +6,7 @@
 /*   By: yel-yaqi <yel-yaqi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/04 17:09:15 by yel-yaqi          #+#    #+#             */
-/*   Updated: 2024/11/28 09:30:02 by yel-yaqi         ###   ########.fr       */
+/*   Updated: 2024/11/30 18:29:18 by yel-yaqi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -79,8 +79,8 @@ void Fixed::setRawBits(int const raw)
 Fixed::Fixed(int const i)
 {
 	std::cout << "Int constructor called" << std::endl;
-	if (i > (int)Q23_8_MAX)
-		fixed = roundf((int)Q23_8_MAX * poww(2, frac));
+	if (i > Q23_8_MAX)
+		fixed = roundf(Q23_8_MAX * poww(2, frac));
 	else if (i < Q23_8_MIN)
 		fixed = Q23_8_MIN * poww(2, frac);
 	else
