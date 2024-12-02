@@ -6,7 +6,7 @@
 /*   By: yel-yaqi <yel-yaqi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/24 23:44:21 by yel-yaqi          #+#    #+#             */
-/*   Updated: 2024/11/25 19:22:05 by yel-yaqi         ###   ########.fr       */
+/*   Updated: 2024/12/02 20:14:48 by yel-yaqi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,7 @@ Point::Point(const Point& p)
 Point& Point::operator= (const Point &f)
 {
 	(void)f;
-	return ((Point&)f);
+	return (*this);
 }
 
 Point::~Point()

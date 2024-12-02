@@ -6,7 +6,7 @@
 /*   By: yel-yaqi <yel-yaqi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/04 17:09:01 by yel-yaqi          #+#    #+#             */
-/*   Updated: 2024/11/30 18:28:58 by yel-yaqi         ###   ########.fr       */
+/*   Updated: 2024/12/02 19:57:55 by yel-yaqi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,9 +43,9 @@ class Fixed
 		float operator- (const Fixed &f);
 		float operator* (const Fixed &f);
 		float operator/ (const Fixed &f);
-		Fixed& operator++ (int);
+		Fixed operator++ (int);
 		Fixed& operator++ ();
-		Fixed& operator-- (int);
+		Fixed operator-- (int);
 		Fixed& operator-- ();
 		// min/max
 		static Fixed& min(Fixed& a, Fixed& b);

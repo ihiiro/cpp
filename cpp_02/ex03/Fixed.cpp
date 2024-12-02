@@ -6,7 +6,7 @@
 /*   By: yel-yaqi <yel-yaqi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/04 17:09:15 by yel-yaqi          #+#    #+#             */
-/*   Updated: 2024/11/30 18:32:18 by yel-yaqi         ###   ########.fr       */
+/*   Updated: 2024/12/02 20:15:31 by yel-yaqi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -221,11 +221,11 @@ float Fixed::operator/ (const Fixed &f)
 
 /* INCREMENT/DECREMENT OVERLOADS */
 
-Fixed& Fixed::operator++ (int)
+Fixed Fixed::operator++ (int)
 {
-	Fixed *pre = new Fixed(this->toFloat());
+	Fixed pre = *this;
 	this->fixed++;
-	return *pre;
+	return pre;
 }
 
 Fixed& Fixed::operator++ ()
@@ -234,11 +234,11 @@ Fixed& Fixed::operator++ ()
 	return *this;
 }
 
-Fixed& Fixed::operator-- (int)
+Fixed Fixed::operator-- (int)
 {
-	Fixed *pre = new Fixed(this->toFloat());
+	Fixed pre = *this;
 	this->fixed--;
-	return *pre;
+	return pre;
 }
 
 Fixed& Fixed::operator-- ()

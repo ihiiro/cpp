@@ -6,7 +6,7 @@
 /*   By: yel-yaqi <yel-yaqi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/04 17:09:15 by yel-yaqi          #+#    #+#             */
-/*   Updated: 2024/11/30 18:29:27 by yel-yaqi         ###   ########.fr       */
+/*   Updated: 2024/12/02 20:10:15 by yel-yaqi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,7 +40,7 @@ double poww(double base, double exp)
 Fixed::Fixed()
 {
 	fixed = 0;
-	std::cout << "Default constructor called" << std::endl;
+	// std::cout << "Default constructor called" << std::endl;
 }
 
 Fixed::Fixed(const Fixed &f)
@@ -49,29 +49,29 @@ Fixed::Fixed(const Fixed &f)
 		this->fixed = 0;
 	else
 		*this = f;
-	std::cout << "Copy constructor called" << std::endl;
+	// std::cout << "Copy constructor called" << std::endl;
 }
 
 Fixed::~Fixed()
 {
-	std::cout << "Destructor called" << std::endl;
+	// std::cout << "Destructor called" << std::endl;
 }
 
 int Fixed::getRawBits() const
 {
-	std::cout << "getRawBits member function called" << std::endl;
+	// std::cout << "getRawBits member function called" << std::endl;
 	return fixed;
 }
 
 void Fixed::setRawBits(int const raw)
 {
 	fixed = raw;
-	std::cout << "setRawBits member function called" << std::endl;
+	// std::cout << "setRawBits member function called" << std::endl;
 }
 
 Fixed::Fixed(int const i)
 {
-	std::cout << "Int constructor called" << std::endl;
+	// std::cout << "Int constructor called" << std::endl;
 	if (i > Q23_8_MAX)
 		fixed = roundf(Q23_8_MAX * poww(2, frac));
 	else if (i < Q23_8_MIN)
@@ -82,7 +82,7 @@ Fixed::Fixed(int const i)
 
 Fixed::Fixed(float const f)
 {
-	std::cout << "Float constructor called" << std::endl;
+	// std::cout << "Float constructor called" << std::endl;
 	if (f > Q23_8_MAX)
 		fixed = roundf(Q23_8_MAX * poww(2, frac));
 	else if (f < Q23_8_MIN)
@@ -143,7 +143,7 @@ Fixed& Fixed::operator=(const Fixed &f)
 {
 	if (this != &f)
 		this->fixed = f.getRawBits();
-	std::cout << "Copy assignment operator called" << std::endl;
+	// std::cout << "Copy assignment operator called" << std::endl;
 	return *this;
 }
 
@@ -221,11 +221,11 @@ float Fixed::operator/ (const Fixed &f)
 
 /* INCREMENT/DECREMENT OVERLOADS */
 
-Fixed& Fixed::operator++ (int)
+Fixed Fixed::operator++ (int)
 {
-	Fixed *pre = new Fixed(this->toFloat());
+	Fixed pre = *this;
 	this->fixed++;
-	return *pre;
+	return pre;
 }
 
 Fixed& Fixed::operator++ ()
@@ -234,11 +234,11 @@ Fixed& Fixed::operator++ ()
 	return *this;
 }
 
-Fixed& Fixed::operator-- (int)
+Fixed Fixed::operator-- (int)
 {
-	Fixed *pre = new Fixed(this->toFloat());
+	Fixed pre = *this;
 	this->fixed--;
-	return *pre;
+	return pre;
 }
 
 Fixed& Fixed::operator-- ()
