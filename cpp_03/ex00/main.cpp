@@ -6,7 +6,7 @@
 /*   By: yel-yaqi <yel-yaqi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/10 18:46:19 by yel-yaqi          #+#    #+#             */
-/*   Updated: 2024/12/10 20:10:11 by yel-yaqi         ###   ########.fr       */
+/*   Updated: 2024/12/10 21:11:32 by yel-yaqi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,25 +26,23 @@ int main()
 	obj0.attack("idiot");
 	obj0.attack("idiot");
 	obj0.attack("idiot");
+	obj0.beRepaired(1);
 	obj0.attack("idiot");
 	obj0.attack("idiot");
 	obj0.attack("idiot");
 	obj0.attack("idiot");
 	obj0.attack("idiot");
 	obj0.attack("idiot");
-	obj0.attack("idiot");
-	obj0.attack("idiot");
-
-	obj1.takeDamage(0);
-	obj1.takeDamage(0);
-	obj1.takeDamage(0);
-	obj1.takeDamage(0);
-	obj1.takeDamage(0);
-	obj1.takeDamage(0);
-	obj1.takeDamage(0);
-	obj1.takeDamage(0);
-	obj1.takeDamage(0);
-	obj1.takeDamage(0);
-	obj1.takeDamage(0);
-	obj1.takeDamage(0);
+	obj1.takeDamage(9);
+	obj1.attack("sub-idiot");
+	obj1.attack("sub-idiot");
+	obj1.attack("sub-idiot");
+	obj1.attack("sub-idiot");
+	obj1.attack("sub-idiot");
+	obj1.attack("sub-idiot");
+	obj1.attack("sub-idiot");
+	obj1.attack("sub-idiot");
+	obj1.attack("sub-idiot");
+	obj1.attack("sub-idiot");
+	obj1.attack("sub-idiot"); // 11th attack can't happen cuz energy points are 0
 }
