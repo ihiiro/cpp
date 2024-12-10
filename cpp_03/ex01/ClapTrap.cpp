@@ -6,7 +6,7 @@
 /*   By: yel-yaqi <yel-yaqi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/10 18:46:15 by yel-yaqi          #+#    #+#             */
-/*   Updated: 2024/12/10 20:07:04 by yel-yaqi         ###   ########.fr       */
+/*   Updated: 2024/12/10 21:52:53 by yel-yaqi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,19 +16,19 @@
 ClapTrap::ClapTrap()
 {
 	name = "sub-idiot";
-	hit_points = 10;
-	energy_points = 10;
-	attack_damage = 0;
-	std::cout << "Default constructor called" << std::endl;
+	hit_points = 100;
+	energy_points = 50;
+	attack_damage = 20;
+	std::cout << "BASE: Default constructor called" << std::endl;
 }
 
 ClapTrap::ClapTrap(std::string nm)
 {
 	name = nm;
-	hit_points = 10;
-	energy_points = 10;
-	attack_damage = 0;
-	std::cout << "Copy constructor called" << std::endl;
+	hit_points = 100;
+	energy_points = 50;
+	attack_damage = 20;
+	std::cout << "BASE: Copy constructor called" << std::endl;
 }
 
 void ClapTrap::attack(const std::string& target)
@@ -36,19 +36,16 @@ void ClapTrap::attack(const std::string& target)
 	if (hit_points != 0 && energy_points != 0)
 	{
 		energy_points--;
-		std::cout << "ClapTrap " << name << " attacks " << target
+		std::cout << "BASE: ClapTrap " << name << " attacks " << target
 		<< " causing " << attack_damage << " points of damage!" << std::endl;
 	}
 }
 
 void ClapTrap::takeDamage(unsigned int amount)
 {
-	if (hit_points != 0 && energy_points != 0)
-	{
-		hit_points -= amount;
-		std::cout << "ClapTrap " << name << " got attacked by someone (probably sub-idiot) and lost "
-		<< amount << " hit points" << std::endl;
-	}
+	hit_points -= amount;
+	std::cout << "BASE: ClapTrap " << name << " got attacked by someone (probably sub-idiot) and lost "
+	<< amount << " hit points" << std::endl;
 }
 
 void ClapTrap::beRepaired(unsigned int amount)
@@ -57,10 +54,12 @@ void ClapTrap::beRepaired(unsigned int amount)
 	{
 		hit_points += amount;
 		energy_points--;
+		std::cout << "BASE: ClapTrap " << name << " repaired and gained "
+		<< amount << " hit points" << std::endl;
 	}
 }
 
 ClapTrap::~ClapTrap()
 {
-	std::cout << "Destructor called" << std::endl;
+	std::cout << "BASE: Destructor called" << std::endl;
 }
