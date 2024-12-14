@@ -6,7 +6,7 @@
 /*   By: yel-yaqi <yel-yaqi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/14 19:07:37 by yel-yaqi          #+#    #+#             */
-/*   Updated: 2024/12/14 19:38:00 by yel-yaqi         ###   ########.fr       */
+/*   Updated: 2024/12/14 23:25:09 by yel-yaqi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,7 @@ void Character::equip(AMateria *m)
 	}
 	/* equip new materia */
 	for (int i = 0; i < 4; i++)
-		if (materias[i])
+		if (!materias[i])
 		{
 			materias[i] = m;
 			return;
@@ -42,7 +42,8 @@ void Character::unequip(int idx)
 
 void Character::use(int idx, ICharacter& target)
 {
-	
+	if (idx >= 0 && idx <= 3)
+		materias[idx]->use(target);
 }
 
 Character::Character()
@@ -57,7 +58,11 @@ Character::Character(const Character &obj)
 	for (int i = 0; i < 4; i++)
 	{
 		delete materias[i];
-		materias[i] = obj.materias[i];
+		if (obj.materias[i]->getType() == "cure")
+			materias[i] = new Cure();
+		else if (obj.materias[i]->getType() == "ice")
+			materias[i] = new Ice();
+		*materias[i] = *obj.materias[i];
 	}
 	std::cout << "CHARACTER: Copy constructor called" << std::endl;
 }
@@ -69,7 +74,11 @@ Character& Character::operator=(const Character &obj)
 		for (int i = 0; i < 4; i++)
 		{
 			delete materias[i];
-			materias[i] = obj.materias[i];
+			if (obj.materias[i]->getType() == "cure")
+				materias[i] = new Cure();
+			else if (obj.materias[i]->getType() == "ice")
+				materias[i] = new Ice();
+			*materias[i] = *obj.materias[i];
 		}
 	}
 	return *this;
@@ -77,5 +86,7 @@ Character& Character::operator=(const Character &obj)
 
 Character::~Character()
 {
+	for (int i = 0; i < 4; i++)
+		delete materias[i], delete unequipped[i];
 	std::cout << "CHARACTER: Destructor called" << std::endl;
 }

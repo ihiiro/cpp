@@ -1,35 +1,29 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   Character.hpp                                      :+:      :+:    :+:   */
+/*   MateriaSource.hpp                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: yel-yaqi <yel-yaqi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/12/14 19:07:34 by yel-yaqi          #+#    #+#             */
-/*   Updated: 2024/12/14 23:00:54 by yel-yaqi         ###   ########.fr       */
+/*   Created: 2024/12/14 20:44:38 by yel-yaqi          #+#    #+#             */
+/*   Updated: 2024/12/14 23:33:35 by yel-yaqi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #pragma once
-#include "ICharacter.hpp"
-#include "Ice.hpp"
+#include "IMateriaSource.hpp"
 #include "Cure.hpp"
+#include "Ice.hpp"
 
-class Character: public ICharacter
+class MateriaSource: public IMateriaSource
 {
 	private:
-		std::string name;
 		AMateria *materias[4];
-		AMateria *unequipped[4];
 	public:
-		Character();
-		~Character();
-		Character(std::string name);
-		Character(const Character &obj);
-		Character& operator=(const Character &obj);
-
-		std::string const & getName() const;
-		void equip(AMateria* m);
-		void unequip(int idx);
-		void use(int idx, ICharacter& target);
+		MateriaSource();
+		~MateriaSource();
+		MateriaSource(const MateriaSource &obj);
+		MateriaSource& operator=(const MateriaSource &obj);
+		void learnMateria(AMateria *m);
+		AMateria* createMateria(std::string const & type);
 };
