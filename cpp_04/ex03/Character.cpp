@@ -6,7 +6,7 @@
 /*   By: yel-yaqi <yel-yaqi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/14 19:07:37 by yel-yaqi          #+#    #+#             */
-/*   Updated: 2024/12/15 01:00:15 by yel-yaqi         ###   ########.fr       */
+/*   Updated: 2024/12/15 01:29:30 by yel-yaqi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,15 +42,17 @@ void Character::unequip(int idx)
 
 void Character::use(int idx, ICharacter& target)
 {
-	if (idx >= 0 && idx <= 3)
+	if (idx >= 0 && idx <= 3 and materias[idx])
 		materias[idx]->use(target);
 }
 
 Character::Character()
 {
 	for (int i = 0; i < 4; i++)
-		materias[i] = NULL, unequipped[i] = NULL;
-	std::cout << "CHARACTER: Default constructor called" << std::endl;
+	{
+		materias[i] = NULL;
+		unequipped[i] = NULL;
+	}
 }
 
 Character::Character(const Character &obj)
@@ -64,7 +66,6 @@ Character::Character(const Character &obj)
 			materias[i] = new Ice();
 		// *materias[i] = *obj.materias[i];
 	}
-	std::cout << "CHARACTER: Copy constructor called" << std::endl;
 }
 
 Character& Character::operator=(const Character &obj)
@@ -93,5 +94,4 @@ Character::~Character()
 {
 	for (int i = 0; i < 4; i++)
 		delete materias[i], delete unequipped[i];
-	std::cout << "CHARACTER: Destructor called" << std::endl;
 }

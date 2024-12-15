@@ -6,7 +6,7 @@
 /*   By: yel-yaqi <yel-yaqi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/14 20:44:36 by yel-yaqi          #+#    #+#             */
-/*   Updated: 2024/12/14 23:33:54 by yel-yaqi         ###   ########.fr       */
+/*   Updated: 2024/12/15 01:33:39 by yel-yaqi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,13 +16,16 @@ void MateriaSource::learnMateria(AMateria *m)
 {
 	for (int i = 0; i < 4; i++)
 		if (!materias[i])
+		{
 			materias[i] = m;
+			break;
+		}
 }
 
 AMateria *MateriaSource::createMateria(std::string const & type)
 {
 	for (int i = 0; i < 4; i++)
-		if (materias[i]->getType() == type)
+		if (materias[i] and materias[i]->getType() == type)
 		{
 			if (type == "cure")
 				return new Cure();
@@ -36,14 +39,12 @@ MateriaSource::MateriaSource()
 {
 	for (int i = 0; i < 4; i++)
 		materias[i] = NULL;
-	std::cout << "MATERIASOURCE: Default constructor called" << std::endl;
 }
 
 MateriaSource::MateriaSource(const MateriaSource &obj)
 {
 	for (int i = 0; i < 4; i++)
 		materias[i] = obj.materias[i];
-	std::cout << "MATERIASOURCE: Copy constructor called" << std::endl;
 }
 
 MateriaSource& MateriaSource::operator=(const MateriaSource &obj)
@@ -56,5 +57,5 @@ MateriaSource& MateriaSource::operator=(const MateriaSource &obj)
 
 MateriaSource::~MateriaSource()
 {
-	std::cout << "MATERIASOURCE: Destructor called" << std::endl;
+	
 }
