@@ -6,7 +6,7 @@
 /*   By: yel-yaqi <yel-yaqi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/14 17:50:09 by yel-yaqi          #+#    #+#             */
-/*   Updated: 2024/12/14 20:37:37 by yel-yaqi         ###   ########.fr       */
+/*   Updated: 2024/12/15 00:55:00 by yel-yaqi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,6 +30,7 @@ Cure::Cure()
 
 Cure::Cure(const Cure &obj)
 {
+	(void)obj;
 	type = "cure";
 	std::cout << "CURE: Copy constructor called" << std::endl;
 }

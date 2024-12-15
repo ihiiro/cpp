@@ -6,7 +6,7 @@
 /*   By: yel-yaqi <yel-yaqi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/14 19:07:37 by yel-yaqi          #+#    #+#             */
-/*   Updated: 2024/12/14 23:25:09 by yel-yaqi         ###   ########.fr       */
+/*   Updated: 2024/12/15 01:00:15 by yel-yaqi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,7 +62,7 @@ Character::Character(const Character &obj)
 			materias[i] = new Cure();
 		else if (obj.materias[i]->getType() == "ice")
 			materias[i] = new Ice();
-		*materias[i] = *obj.materias[i];
+		// *materias[i] = *obj.materias[i];
 	}
 	std::cout << "CHARACTER: Copy constructor called" << std::endl;
 }
@@ -78,10 +78,15 @@ Character& Character::operator=(const Character &obj)
 				materias[i] = new Cure();
 			else if (obj.materias[i]->getType() == "ice")
 				materias[i] = new Ice();
-			*materias[i] = *obj.materias[i];
+			// *materias[i] = *obj.materias[i];
 		}
 	}
 	return *this;
+}
+
+Character::Character(std::string nm)
+{
+	name = nm;
 }
 
 Character::~Character()

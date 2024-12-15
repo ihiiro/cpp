@@ -6,7 +6,7 @@
 /*   By: yel-yaqi <yel-yaqi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/14 19:07:34 by yel-yaqi          #+#    #+#             */
-/*   Updated: 2024/12/14 23:00:54 by yel-yaqi         ###   ########.fr       */
+/*   Updated: 2024/12/15 00:59:55 by yel-yaqi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,7 @@ class Character: public ICharacter
 	public:
 		Character();
 		~Character();
-		Character(std::string name);
+		Character(std::string nm);
 		Character(const Character &obj);
 		Character& operator=(const Character &obj);
 
