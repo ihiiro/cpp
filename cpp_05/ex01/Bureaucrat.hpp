@@ -6,7 +6,7 @@
 /*   By: yel-yaqi <yel-yaqi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/18 04:38:07 by yel-yaqi          #+#    #+#             */
-/*   Updated: 2024/12/31 19:07:34 by yel-yaqi         ###   ########.fr       */
+/*   Updated: 2024/12/31 19:43:58 by yel-yaqi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,7 @@
 #include <iostream>
 #include "GradeTooHighException.hpp"
 #include "GradeTooLowException.hpp"
+#include "Form.hpp"
 
 /*==================================*/
 /*==================================*/
@@ -50,12 +51,8 @@ class Bureaucrat
 		std::string getName() const;
 		int getGrade() const;
 		/*==================================*/
-		/* EXCEPTIONS */
-		static GradeTooHighException gth;
-		static GradeTooLowException gtl;
-		/*==================================*/
 		/* NON-MODIFIERS */
-		void signForm();
+		void signForm(Form const &obj);
 };
 /*==================================*/
 /*==================================*/

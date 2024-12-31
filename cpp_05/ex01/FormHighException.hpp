@@ -1,18 +1,20 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   GradeTooLowException.cpp                           :+:      :+:    :+:   */
+/*   FormHighException.hpp                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: yel-yaqi <yel-yaqi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/12/31 12:01:31 by yel-yaqi          #+#    #+#             */
-/*   Updated: 2024/12/31 19:15:48 by yel-yaqi         ###   ########.fr       */
+/*   Created: 2024/12/31 19:25:21 by yel-yaqi          #+#    #+#             */
+/*   Updated: 2024/12/31 19:27:32 by yel-yaqi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "GradeTooLowException.hpp"
+#pragma once
+#include <exception>
 
-const char *GradeTooLowException::what() const throw()
+class FormHighException: public std::exception
 {
-	return "Bureaucrat::GradeTooLowException";
-}
+	public:
+		const char *what() const throw();
+};

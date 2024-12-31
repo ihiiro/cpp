@@ -6,7 +6,7 @@
 /*   By: yel-yaqi <yel-yaqi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/18 04:38:07 by yel-yaqi          #+#    #+#             */
-/*   Updated: 2024/12/31 12:45:03 by yel-yaqi         ###   ########.fr       */
+/*   Updated: 2024/12/31 19:17:42 by yel-yaqi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,10 +48,6 @@ class Bureaucrat
 		/* GETTERS */
 		std::string getName() const;
 		int getGrade() const;
-
-		/* EXCEPTIONS */
-		static GradeTooHighException gth;
-		static GradeTooLowException gtl;
 };
 /*==================================*/
 /*==================================*/

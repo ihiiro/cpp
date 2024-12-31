@@ -6,7 +6,7 @@
 /*   By: yel-yaqi <yel-yaqi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/18 04:38:10 by yel-yaqi          #+#    #+#             */
-/*   Updated: 2024/12/31 19:09:51 by yel-yaqi         ###   ########.fr       */
+/*   Updated: 2024/12/31 20:10:50 by yel-yaqi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,6 +63,17 @@ void Bureaucrat::dec()
 	if (grade + 1 > 150)
 		throw GradeTooLowException();
 	grade++;
+}
+/*==================================*/
+/*==================================*/
+/* NON-MODIFIERS */
+void Bureaucrat::signForm(Form const &obj)
+{
+	if (grade <= obj.getSigner())
+		std::cout << name << " signed " << obj.getName() << std::endl;
+	else
+		std::cout << name << " cound't sign " << obj.getName()
+		<< " because grade is too low" << std::endl;
 }
 /*==================================*/
 /*==================================*/

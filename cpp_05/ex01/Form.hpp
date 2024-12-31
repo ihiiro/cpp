@@ -6,13 +6,18 @@
 /*   By: yel-yaqi <yel-yaqi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/31 18:14:21 by yel-yaqi          #+#    #+#             */
-/*   Updated: 2024/12/31 19:08:01 by yel-yaqi         ###   ########.fr       */
+/*   Updated: 2024/12/31 19:56:19 by yel-yaqi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #pragma once
 #include <string>
-#include "Bureaucrat.hpp"
+#include "FormHighException.hpp"
+#include "FormLowException.hpp"
+#include <iostream>
+
+/* FORWARD */
+class Bureaucrat;
 
 /*==================================*/
 /*==================================*/
@@ -28,7 +33,7 @@ class Form
 		/*==================================*/
 		/* COMMON */
 		Form();
-		Form(std::string nm, int sign_er, int executi_ve);
+		Form(char const *nm, int sign_er, int executi_ve);
 		~Form();
 		Form(const Form &obj);
 		Form& operator=(const Form &obj);
@@ -41,10 +46,6 @@ class Form
 		/*==================================*/
 		/* MODIFIERS */
 		void beSigned(Bureaucrat const &obj);
-		/*==================================*/
-		/* EXCEPTIONS */
-		static GradeTooHighException gth;
-		static GradeTooLowException gtl;
 };
 /*==================================*/
 /*==================================*/
