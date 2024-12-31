@@ -6,7 +6,7 @@
 /*   By: yel-yaqi <yel-yaqi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/14 19:07:37 by yel-yaqi          #+#    #+#             */
-/*   Updated: 2024/12/15 01:29:30 by yel-yaqi         ###   ########.fr       */
+/*   Updated: 2024/12/15 21:18:50 by yel-yaqi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,7 +36,7 @@ void Character::equip(AMateria *m)
 
 void Character::unequip(int idx)
 {
-	if (idx >= 0 && idx <= 3)
+	if (idx >= 0 && idx <= 3 )
 		unequipped[idx] = materias[idx];
 }
 

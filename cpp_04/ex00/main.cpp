@@ -6,7 +6,7 @@
 /*   By: yel-yaqi <yel-yaqi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/11 15:50:34 by yel-yaqi          #+#    #+#             */
-/*   Updated: 2024/12/11 17:04:09 by yel-yaqi         ###   ########.fr       */
+/*   Updated: 2024/12/15 01:52:32 by yel-yaqi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,8 +14,11 @@
 #include "Cat.hpp"
 #include "WrongCat.hpp"
 
+void f() {system("leaks zoo");}
+
 int main()
 {
+	atexit(f);
 	const Animal* meta = new Animal();
 	const Animal* j = new Dog();
 	const Animal* i = new Cat();
