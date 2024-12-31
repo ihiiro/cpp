@@ -1,18 +1,18 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   GradeTooHighException.cpp                          :+:      :+:    :+:   */
+/*   GradeTooLowException.cpp                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: yel-yaqi <yel-yaqi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/12/31 12:01:27 by yel-yaqi          #+#    #+#             */
-/*   Updated: 2024/12/31 19:11:46 by yel-yaqi         ###   ########.fr       */
+/*   Created: 2024/12/31 12:01:31 by yel-yaqi          #+#    #+#             */
+/*   Updated: 2024/12/31 12:28:42 by yel-yaqi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "GradeTooHighException.hpp"
+#include "GradeTooLowException.hpp"
 
-const char *GradeTooHighException::what() const throw()
+const char *GradeTooLowException::what() const throw()
 {
-	return "Bureaucrat::GradeTooHighException";
+	return "Grade too Low!";
 }

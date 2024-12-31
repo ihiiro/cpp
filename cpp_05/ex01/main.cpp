@@ -6,7 +6,7 @@
 /*   By: yel-yaqi <yel-yaqi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/31 12:12:22 by yel-yaqi          #+#    #+#             */
-/*   Updated: 2024/12/31 19:13:23 by yel-yaqi         ###   ########.fr       */
+/*   Updated: 2024/12/31 13:02:11 by yel-yaqi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,6 @@ int main()
 	{
 		std::cout << "Exception: " << e.what() << std::endl;
 	}
-	/*==================================*/
 	try
 	{
 		Bureaucrat bc(222, "named");
@@ -31,7 +30,6 @@ int main()
 	{
 		std::cout << "Exception: " << e.what() << std::endl;
 	}
-	/*==================================*/
 	try
 	{
 		Bureaucrat bc(150, "slickback");
@@ -41,7 +39,6 @@ int main()
 	{
 		std::cout << "Exception: " << e.what() << std::endl;
 	}
-	/*==================================*/
 	try
 	{
 		Bureaucrat bc(1, "slickback");
@@ -51,8 +48,8 @@ int main()
 	{
 		std::cout << "Exception: " << e.what() << std::endl;
 	}
-	/*==================================*/
 	Bureaucrat bc(1, "wower");
+
 	bc.dec();
 	std::cout << bc << std::endl;
 	bc.inc();

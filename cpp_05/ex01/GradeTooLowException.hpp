@@ -1,18 +1,20 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   GradeTooHighException.cpp                          :+:      :+:    :+:   */
+/*   GradeTooLowException.hpp                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: yel-yaqi <yel-yaqi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/12/31 12:01:27 by yel-yaqi          #+#    #+#             */
-/*   Updated: 2024/12/31 19:11:46 by yel-yaqi         ###   ########.fr       */
+/*   Created: 2024/12/31 11:30:00 by yel-yaqi          #+#    #+#             */
+/*   Updated: 2024/12/31 12:47:52 by yel-yaqi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "GradeTooHighException.hpp"
+#pragma once
+#include <exception>
 
-const char *GradeTooHighException::what() const throw()
+class GradeTooLowException: public std::exception
 {
-	return "Bureaucrat::GradeTooHighException";
-}
+	public:
+		const char *what() const throw();
+};
