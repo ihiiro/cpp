@@ -6,7 +6,7 @@
 /*   By: yel-yaqi <yel-yaqi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/18 04:38:10 by yel-yaqi          #+#    #+#             */
-/*   Updated: 2025/01/02 18:52:04 by yel-yaqi         ###   ########.fr       */
+/*   Updated: 2025/01/02 19:11:09 by yel-yaqi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -88,7 +88,7 @@ void Bureaucrat::executeForm(AForm const &form) const
 	}
 	catch (std::exception &e)
 	{
-		std::cout << name << " could not sign " << form.getName() <<
+		std::cout << name << " could not execute " << form.getName() <<
 		" due to exception: " << e.what() << std::endl; 
 	}
 }
