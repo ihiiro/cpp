@@ -6,7 +6,7 @@
 /*   By: yel-yaqi <yel-yaqi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/31 12:12:22 by yel-yaqi          #+#    #+#             */
-/*   Updated: 2024/12/31 20:14:10 by yel-yaqi         ###   ########.fr       */
+/*   Updated: 2025/01/02 18:58:27 by yel-yaqi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,8 +56,6 @@ int main()
 		Bureaucrat bc(51, "bureaucrat");
 		std::cout << form;
 		bc.signForm(form);
-		std::cout << form;
-		form.beSigned(bc);
 		std::cout << form;
 	}
 	catch (std::exception &e)

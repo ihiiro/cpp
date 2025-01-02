@@ -6,13 +6,14 @@
 /*   By: yel-yaqi <yel-yaqi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/31 18:14:25 by yel-yaqi          #+#    #+#             */
-/*   Updated: 2025/01/02 17:54:39 by yel-yaqi         ###   ########.fr       */
+/*   Updated: 2025/01/02 18:47:06 by yel-yaqi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "AForm.hpp"
 #include "Bureaucrat.hpp"
 /*==================================*/
+AForm::~AForm(){}
 /*==================================*/
 /* GETTERS */
 std::string AForm::getName() const
@@ -75,6 +76,8 @@ void AForm::execute(Bureaucrat const &executive_) const
 {
 	if (executive_.getGrade() > executive)
 		throw FormLowException();
+	if (!signed__)
+		throw "Exception: form is not signed\n";
 	this->execute_();
 }
 /*==================================*/

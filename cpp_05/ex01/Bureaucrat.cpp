@@ -6,7 +6,7 @@
 /*   By: yel-yaqi <yel-yaqi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/18 04:38:10 by yel-yaqi          #+#    #+#             */
-/*   Updated: 2024/12/31 20:10:50 by yel-yaqi         ###   ########.fr       */
+/*   Updated: 2025/01/02 18:55:14 by yel-yaqi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,12 +67,15 @@ void Bureaucrat::dec()
 /*==================================*/
 /*==================================*/
 /* NON-MODIFIERS */
-void Bureaucrat::signForm(Form const &obj)
+void Bureaucrat::signForm(Form &obj)
 {
 	if (grade <= obj.getSigner())
+	{
 		std::cout << name << " signed " << obj.getName() << std::endl;
+		obj.beSigned(*this);
+	}
 	else
-		std::cout << name << " cound't sign " << obj.getName()
+		std::cout << name << " couldn't sign " << obj.getName()
 		<< " because grade is too low" << std::endl;
 }
 /*==================================*/

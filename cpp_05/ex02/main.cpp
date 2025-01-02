@@ -6,62 +6,32 @@
 /*   By: yel-yaqi <yel-yaqi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/31 12:12:22 by yel-yaqi          #+#    #+#             */
-/*   Updated: 2024/12/31 20:14:10 by yel-yaqi         ###   ########.fr       */
+/*   Updated: 2025/01/02 18:47:36 by yel-yaqi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "Bureaucrat.hpp"
+#include "PresidentialPardonForm.hpp"
+#include "RobotomyRequestForm.hpp"
+#include "ShrubberyCreationForm.hpp"
 
 int main()
 {
-	try
-	{
-		Form form("form", 0, 0);
-	}
-	catch (std::exception &e)
-	{
-		std::cout << "Exception: " << e.what() << std::endl;
-	}
-	/*==================================*/
-	try
-	{
-		Form form("form", 151, 151);
-	}
-	catch (std::exception &e)
-	{
-		std::cout << "Exception: " << e.what() << std::endl;
-	}
-	/*==================================*/
-	try
-	{
-		Form form("form", 150, 150);
-	}
-	catch (std::exception &e)
-	{
-		std::cout << "Exception: " << e.what() << std::endl;
-	}
-	/*==================================*/
-	try
-	{
-		Form form("form", 1, 1);
-	}
-	catch (std::exception &e)
-	{
-		std::cout << "Exception: " << e.what() << std::endl;
-	}
-	/*==================================*/
-	try
-	{
-		Form form("form", 50, 50);
-		Bureaucrat bc(51, "bureaucrat");
-		std::cout << form;
-		bc.signForm(form);
-		std::cout << form;
-		form.beSigned(bc);
-		std::cout << form;
-	}
-	catch (std::exception &e)
-	{
-		std::cout << "Exception: " << e.what() << std::endl;
-	}
+	/* bureaucrats */
+	Bureaucrat president(5, "president");
+	Bureaucrat vice(2, "vice");
+	/* forms */
+	PresidentialPardonForm pardon("Xavier renegade angel");
+	RobotomyRequestForm lobotomy("Akhannouch");
+	/* vice signs pardon */
+	vice.signForm(pardon);
+	/* president executes the form */
+	president.executeForm(pardon);
+	/* new vice and president */
+	// for (; president.getGrade() != 137; president.dec());
+	// for (; vice.getGrade() != 145; president.dec());
+	// /* vice signs lobotomy */
+	// vice.signForm(lobotomy);
+	// /* president executes the form */
+	// president.executeForm(lobotomy);
 }

@@ -6,7 +6,7 @@
 /*   By: yel-yaqi <yel-yaqi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/18 04:38:07 by yel-yaqi          #+#    #+#             */
-/*   Updated: 2025/01/02 17:50:10 by yel-yaqi         ###   ########.fr       */
+/*   Updated: 2025/01/02 18:51:23 by yel-yaqi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,7 +52,7 @@ class Bureaucrat
 		int getGrade() const;
 		/*==================================*/
 		/* NON-MODIFIERS */
-		void signForm(AForm const &obj) const;
+		void signForm(AForm &obj) const;
 		void executeForm(AForm const &form) const;
 };
 /*==================================*/

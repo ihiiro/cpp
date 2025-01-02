@@ -6,7 +6,7 @@
 /*   By: yel-yaqi <yel-yaqi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/31 18:14:21 by yel-yaqi          #+#    #+#             */
-/*   Updated: 2025/01/02 17:54:36 by yel-yaqi         ###   ########.fr       */
+/*   Updated: 2025/01/02 18:50:40 by yel-yaqi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,7 +41,7 @@ class AForm
 		int getExecutive() const;
 		std::string getTarget() const;
 		/* SETTERS */
-		void setName(std::string const nm);
+		void setName(std::string nm);
 		void setSigned(bool signed_);
 		void setSigner(int signer_);
 		void setExecutive(int executive_);
