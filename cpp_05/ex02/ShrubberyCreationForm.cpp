@@ -6,7 +6,7 @@
 /*   By: yel-yaqi <yel-yaqi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/02 16:19:40 by yel-yaqi          #+#    #+#             */
-/*   Updated: 2025/01/02 17:46:12 by yel-yaqi         ###   ########.fr       */
+/*   Updated: 2025/01/02 19:34:23 by yel-yaqi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,5 +46,13 @@ ShrubberyCreationForm::~ShrubberyCreationForm(){}
 /* NON-MODIFIERS */
 void ShrubberyCreationForm::execute_() const
 {
-	std::cout << getName() << " execute_ called" << std::endl; // to change
+	std::ofstream stream(getTarget() + "_shrubbery");
+	stream << "			//////\n";
+	stream << "		//////////////\n";
+	stream << "	//////////////////////\n";
+	stream << "///////////////////////////////\n";
+	stream << "			//\n";
+	stream << "			//\n";
+	stream << "			//\n";
+	stream << "			//\n";
 }

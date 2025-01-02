@@ -6,7 +6,7 @@
 /*   By: yel-yaqi <yel-yaqi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/02 18:12:07 by yel-yaqi          #+#    #+#             */
-/*   Updated: 2025/01/02 18:29:27 by yel-yaqi         ###   ########.fr       */
+/*   Updated: 2025/01/02 19:53:20 by yel-yaqi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,5 +46,12 @@ RobotomyRequestForm::~RobotomyRequestForm(){}
 /* NON-MODIFIERS */
 void RobotomyRequestForm::execute_() const
 {
-	std::cout << getName() << " execute_ called" << std::endl; // to change
+	std::cout << "*** (drilling noises) ***" << std::endl;
+	std::srand(std::time(NULL));
+	std::cout << "Robotomy on " << getTarget();
+	if ((std::rand() % 2) == 0)
+		std::cout << " succeeded!";
+	else
+		std::cout << " failed :/";
+	std::cout << std::endl;
 }

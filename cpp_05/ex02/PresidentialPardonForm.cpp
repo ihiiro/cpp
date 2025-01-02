@@ -6,7 +6,7 @@
 /*   By: yel-yaqi <yel-yaqi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/02 18:10:20 by yel-yaqi          #+#    #+#             */
-/*   Updated: 2025/01/02 18:29:48 by yel-yaqi         ###   ########.fr       */
+/*   Updated: 2025/01/02 19:54:44 by yel-yaqi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,5 +46,5 @@ PresidentialPardonForm::~PresidentialPardonForm(){}
 /* NON-MODIFIERS */
 void PresidentialPardonForm::execute_() const
 {
-	std::cout << getName() << " execute_ called" << std::endl; // to change
+	std::cout << getTarget() << " has been pardoned by Zaphod Beeblebrox" << std::endl;
 }
