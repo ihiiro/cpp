@@ -6,20 +6,32 @@
 #    By: yel-yaqi <yel-yaqi@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/12/03 10:20:38 by yel-yaqi          #+#    #+#              #
-#    Updated: 2025/01/10 18:45:13 by yel-yaqi         ###   ########.fr        #
+#    Updated: 2025/01/17 11:34:45 by yel-yaqi         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 CFLAGS = -std=c++98 -Wall -Wextra -Werror
 
-SOURCES = main.cpp ScalarConverter.cpp
+CFILES = main.cpp ScalarConverter.cpp
 
 HEADERS = ScalarConverter.hpp
 
-TARGET = static
+NAME = static
 
-$(TARGET): $(SOURCES) $(HEADERS) Makefile
-	c++ $(SOURCES) $(CFLAGS) -o $@
+OFILES = $(CFILES:.cpp=.o)
 
-clear:
-	rm -f $(TARGET)
+%.o: %.cpp
+	c++ $(CFLAGS) -c $<
+
+$(NAME): $(OFILES) $(HEADERS) Makefile
+	c++ $(OFILES) -o $@
+
+all: $(NAME)
+
+clean:
+	rm -f $(OFILES)
+
+fclean: clean
+	rm -f $(NAME)
+
+re: fclean all

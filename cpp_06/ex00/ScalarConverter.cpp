@@ -6,7 +6,7 @@
 /*   By: yel-yaqi <yel-yaqi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/05 13:51:13 by yel-yaqi          #+#    #+#             */
-/*   Updated: 2025/01/10 19:26:02 by yel-yaqi         ###   ########.fr       */
+/*   Updated: 2025/01/17 12:08:20 by yel-yaqi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,10 @@ ScalarConverter::ScalarConverter(){}
 ScalarConverter::ScalarConverter(ScalarConverter const&){}
 ScalarConverter &ScalarConverter::operator=(ScalarConverter const&){ return *this; }
 ScalarConverter::~ScalarConverter(){}
+
+
+
+
 /* check if two double precision values are roughly equal */
 double xabs(double x)
 {
@@ -26,6 +30,13 @@ double equal(double a, double b)
 {
 	return xabs(a - b) < .0001;
 }
+
+
+
+
+
+
+
 /* print literal as: char, int, double, float to stdout */
 void print_conversions(double literal, std::string original)
 {
@@ -75,10 +86,21 @@ void print_conversions(double literal, std::string original)
 /* detect and convert literals to detected type */
 void ScalarConverter::convert(std::string literal)
 {
-	float f; double d; int i; char c;
+	float f; double d; int i; char c; // types
+	size_t first_not_digit = literal.find_first_not_of("-+.0123456789", 0);
+	size_t size = literal.size();
+	// char
+	if ((literal[0] < '0' or literal[0] > '9')
+		and size == 1)
+	{
+		c = static_cast<char>(literal[0]);
+		print_conversions(static_cast<double>(c), literal);
+	}
 	// float
-	if (literal[literal.size() - 1] == 'f'
-		or literal == "+inff" or literal == "-inff")
+	else if (literal == "+inff" or literal == "-inff" or 
+			literal == "nanf" or
+				(first_not_digit == size - 1 and
+				literal[first_not_digit] == 'f'))
 	{
 		f = static_cast<float>(std::atof(literal.data()));
 		print_conversions(static_cast<double>(f), literal);
@@ -90,13 +112,6 @@ void ScalarConverter::convert(std::string literal)
 	{
 		d = std::atof(literal.data());
 		print_conversions(d, literal);
-	}
-	// char
-	else if ((literal[0] < '0' or literal[0] > '9')
-			and literal[0] != '-' and literal[0] != '+')
-	{
-		c = static_cast<char>(literal[0]);
-		print_conversions(static_cast<double>(c), literal);
 	}
 	// int
 	else

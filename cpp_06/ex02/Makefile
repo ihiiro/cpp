@@ -6,20 +6,32 @@
 #    By: yel-yaqi <yel-yaqi@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/12/03 10:20:38 by yel-yaqi          #+#    #+#              #
-#    Updated: 2025/01/11 01:26:11 by yel-yaqi         ###   ########.fr        #
+#    Updated: 2025/01/17 11:34:21 by yel-yaqi         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 CFLAGS = -std=c++98 -Wall -Wextra -Werror
 
-SOURCES = main.cpp
+CFILES = main.cpp
 
-HEADERS = Base.hpp A.hpp B.hpp C.hpp
+HEADERS = A.hpp B.hpp C.hpp Base.hpp
 
-TARGET = id
+NAME = static
 
-$(TARGET): $(SOURCES) $(HEADERS) Makefile
-	c++ $(SOURCES) $(CFLAGS) -o $@
+OFILES = $(CFILES:.cpp=.o)
 
-clear:
-	rm -f $(TARGET)
+%.o: %.cpp
+	c++ $(CFLAGS) -c $< 
+
+$(NAME): $(OFILES) $(HEADERS) Makefile
+	c++ $(OFILES) -o $@
+
+all: $(NAME)
+
+clean:
+	rm -f $(OFILES)
+
+fclean: clean
+	rm -f $(NAME)
+
+re: fclean all
