@@ -6,7 +6,7 @@
 /*   By: yel-yaqi <yel-yaqi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/19 16:29:19 by yel-yaqi          #+#    #+#             */
-/*   Updated: 2025/01/19 19:48:21 by yel-yaqi         ###   ########.fr       */
+/*   Updated: 2025/01/19 20:05:16 by yel-yaqi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -78,6 +78,7 @@ class Array
 			}
 			for (size_t i(0); i < src.size(); i++)
 				array[i] = src.array[i];
+			len = src.size();
 		}
 
 
@@ -100,6 +101,7 @@ class Array
 				}
 				for (size_t i(0); i < rhs.size(); i++)
 					array[i] = rhs.array[i];
+				len = rhs.size();
 			}
 			return *this;
 		}

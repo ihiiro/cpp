@@ -6,7 +6,7 @@
 /*   By: yel-yaqi <yel-yaqi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/19 16:29:24 by yel-yaqi          #+#    #+#             */
-/*   Updated: 2025/01/19 19:49:40 by yel-yaqi         ###   ########.fr       */
+/*   Updated: 2025/01/19 20:06:28 by yel-yaqi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -80,7 +80,7 @@ int main()
 		<< &ARR_array[i] << std::endl;
 	}
 	std::cout << "======================" << std::endl;
-	Array<ARR> ARR_array2;
+	Array<ARR> ARR_array2(2);
 	// the assignment overload
 	ARR_array2 = ARR_array1;
 	for(size_t i(0); i < 2; i++)
