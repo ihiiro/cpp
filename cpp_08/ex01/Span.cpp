@@ -6,7 +6,7 @@
 /*   By: yel-yaqi <yel-yaqi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/22 17:35:32 by yel-yaqi          #+#    #+#             */
-/*   Updated: 2025/01/23 20:44:30 by yel-yaqi         ###   ########.fr       */
+/*   Updated: 2025/01/24 02:45:41 by yel-yaqi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,12 +47,6 @@ Span::~Span()
 
 
 
-
-
-
-
-
-
 void Span::addNumber(int i)
 {
 	if (li.size() + 1 > max_size)
@@ -73,7 +67,7 @@ struct IncGenerator
 void Span::addRange(int min, int max)
 {
 	if (min > max or (max - min + 1) + li.size() > max_size)
-		throw "Exception: addRange(): min > max";
+		throw "Exception: addRange(): min > max or range too high";
 	std::list<int> li_(max - min + 1);
 	IncGenerator g(min);
 	std::generate(li_.begin(), li_.end(), g);
