@@ -6,7 +6,7 @@
 /*   By: yel-yaqi <yel-yaqi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/26 17:23:12 by yel-yaqi          #+#    #+#             */
-/*   Updated: 2025/02/11 22:52:07 by yel-yaqi         ###   ########.fr       */
+/*   Updated: 2025/02/11 23:07:45 by yel-yaqi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -83,14 +83,27 @@ int main(int argc, char **argv)
 
 /*
 
-process_year( stream )
+process_year( stream , arr )
 	1st character is 2 then (add equivalent to yi) else (throw "BAD LINE")
 	2nd character is 0 then (add equivalent to yi) else (throw "BAD LINE")
 	3rd character in range [0, 2] then (add equivalent to yi) else (throw "BAD LINE")
 	4th character in range [0, 9] then (add equivalent to yi) else (throw "BAD LINE")
+	set arr[1] to 29 if leap year
 	return yi
 
-process_md( stream )
-	1st character in range [0, 1] then (add equivalent to yi) else (throw "BAD LINE")
+process_month( stream )
+	1st character in range [0, 1] then (add equivalent to mi) else (throw "BAD LINE") <==== A
+	if A is 0 then
+		2nd character in range [1, 9] then (add equivalent to mi) else (throw "BAD LINE")
+	else A is 1 then
+		2nd character in range [0, 2] then (add equivalent to mi) else (throw "BAD LINE")
+	return mi
+
+process_day( stream , month , arr )
+	1st character in range [0, 9] then (add equivalent to di) else (throw "BAD LINE") 
+	2nd character in range [0, 9] then (add equivalent to di) else (throw "BAD LINE") 
+	mi in range [1, arr[month - 1]]
+
+
 
 */
