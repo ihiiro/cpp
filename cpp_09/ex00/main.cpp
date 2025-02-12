@@ -6,7 +6,7 @@
 /*   By: yel-yaqi <yel-yaqi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/26 17:23:12 by yel-yaqi          #+#    #+#             */
-/*   Updated: 2025/02/12 01:30:47 by yel-yaqi         ###   ########.fr       */
+/*   Updated: 2025/02/12 02:40:04 by yel-yaqi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -107,6 +107,7 @@ process_day( stream , month , arr )
 
 process_value( stream )
 	nth character in range [0, 9] --> (n+k)th character is '.' --> (n+k+p)th character in range [0, 9]
+	last character is '\n' or eof
 	return (string copy of value)
 
 process_line()
@@ -119,7 +120,6 @@ process_line()
 	character after ' ' is '|' else (throw "BAD LINE")
 	character after '|' is ' ' else (throw "BAD LINE")
 	process_value() <=== D
-	character after D is '\n' or eof
 
 	DATE <-- A + B + C
 	VALUE <-- D (D in range [0, 1000] check in conversion time)

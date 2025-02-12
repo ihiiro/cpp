@@ -6,11 +6,14 @@
 /*   By: yel-yaqi <yel-yaqi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/26 17:23:09 by yel-yaqi          #+#    #+#             */
-/*   Updated: 2025/02/12 02:14:33 by yel-yaqi         ###   ########.fr       */
+/*   Updated: 2025/02/12 02:42:20 by yel-yaqi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <fstream>
+#include <string>
+
+#include "BitcoinExchange.hpp"
 
 /*
 
@@ -31,16 +34,16 @@ int process_year(std::ifstream stream, int *feb_ptr)
 	int order = 10000000; // 10 ^ 7 is the max order of magnitude in YYYYMMDD
 	char c = stream.get();
 
-	(c == '2') ? yi += (c - '0') * order : throw "BAD LINE";
+	(c == '2') ? yi += (c - '0') * order : throw BAD_YEAR;
 	c = stream.get();
 	order /= 10;
-	(c == '0') ? yi += (c - '0') * order : throw "BAD LINE";
+	(c == '0') ? yi += (c - '0') * order : throw BAD_YEAR;
 	c = stream.get();
 	order /= 10;
-	(c >= '0' and c <= '2') ? yi += (c - '0') * order : throw "BAD LINE";
+	(c >= '0' and c <= '2') ? yi += (c - '0') * order : throw BAD_YEAR;
 	c = stream.get();
 	order /= 10;
-	(c >= '0' and c <= '9') ? yi += (c - '0') * order : throw "BAD LINE";
+	(c >= '0' and c <= '9') ? yi += (c - '0') * order : throw BAD_YEAR;
 	/* dividing by 10 ^ 4 gives us the year portion
 		if its divisible by 4 then its a leap year
 	*/
@@ -69,15 +72,15 @@ int process_month(std::ifstream stream)
 	char c = stream.get();
 	char peek_back_c = c; // only need one peek backwards (only two digits: MM)
 
-	(c >= '0' and c <= '1') ? mi += (c - '0') * order : throw "BAD LINE";
+	(c >= '0' and c <= '1') ? mi += (c - '0') * order : throw BAD_MONTH;
 	order /= 10;
 	c = stream.get();
 	if (peek_back_c == '0')
-		(c >= '1' and c <= '9') ? mi += (c - '0') * order : throw "BAD LINE";
+		(c >= '1' and c <= '9') ? mi += (c - '0') * order : throw BAD_MONTH;
 	else if (peek_back_c == '1')
-		(c >= '0' and c <= '2') ? mi += (c - '0') * order : throw "BAD LINE";
+		(c >= '0' and c <= '2') ? mi += (c - '0') * order : throw BAD_MONTH;
 	else
-		throw "BAD LINE";
+		throw BAD_MONTH;
 	return mi;
 }
 
@@ -98,9 +101,31 @@ int process_day(std::ifstream stream, int month, int *months)
 	int order = 10; // 10 ^ 1 because DD sits in positions 10 ^ 0 and 10 ^ 1
 	char c = stream.get();
 
-	(c >= '1' and c <= '9') ? di += (c - '0') * order : throw "BAD LINE";
+	(c >= '1' and c <= '9') ? di += (c - '0') * order : throw BAD_DAY;
 	order /= 10;
 	c = stream.get();
-	(c >= '1' and c <= '9') ? di += (c - '0') * order : throw "BAD LINE";
-	return (di >= 1 and di <= months[month - 1]) ? di : throw "BAD LINE";
+	(c >= '1' and c <= '9') ? di += (c - '0') * order : throw BAD_DAY;
+	if (di >= 1 and di <= months[month - 1])
+	{
+		months[1] = 28; // return february to begin 28 days
+		return di;
+	}
+	months[1] = 28;
+	throw BAD_DAY;
+}
+
+/*
+
+process_value( stream )
+	nth character in range [0, 9] --> (n+k)th character is '.' --> (n+k+p)th character in range [0, 9]
+	last character is '\n' or eof
+	return (string copy of value)
+
+*/
+
+std::string& process_value(std::ifstream stream)
+{
+	std::string value_copy;
+
+	
 }
