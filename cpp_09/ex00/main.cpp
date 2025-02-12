@@ -6,7 +6,7 @@
 /*   By: yel-yaqi <yel-yaqi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/26 17:23:12 by yel-yaqi          #+#    #+#             */
-/*   Updated: 2025/02/11 23:28:35 by yel-yaqi         ###   ########.fr       */
+/*   Updated: 2025/02/12 01:30:47 by yel-yaqi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,18 +59,18 @@ int main(int argc, char **argv)
 
 	/*    proto   */
 	
-	char c = input_file.get();
+	// char c = input_file.get();
 
 
 
-	while (c != '\n' and c != traits_type::eof())
-	{
-		std::cout << c;
+	// while (c != '\n' and c != traits_type::eof())
+	// {
+	// 	std::cout << c;
 
 		
 		
-		c = input_file.get();
-	}
+	// 	c = input_file.get();
+	// }
 
 
 
@@ -103,6 +103,7 @@ process_day( stream , month , arr )
 	1st character in range [0, 9] then (add equivalent to di) else (throw "BAD LINE") 
 	2nd character in range [0, 9] then (add equivalent to di) else (throw "BAD LINE") 
 	mi in range [1, arr[month - 1]]
+	arr[1] = 28;
 
 process_value( stream )
 	nth character in range [0, 9] --> (n+k)th character is '.' --> (n+k+p)th character in range [0, 9]
