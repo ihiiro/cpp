@@ -6,7 +6,7 @@
 /*   By: yel-yaqi <yel-yaqi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/26 17:23:09 by yel-yaqi          #+#    #+#             */
-/*   Updated: 2025/02/12 01:37:33 by yel-yaqi         ###   ########.fr       */
+/*   Updated: 2025/02/12 02:14:33 by yel-yaqi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,3 +60,47 @@ process_month( stream )
 	return mi
 
 */
+
+int process_month(std::ifstream stream)
+{
+	// possibly gonna need to catch "BAD LINE" here (propagate?)
+	char mi = 0;
+	int order = 1000; // 10 ^ 3 because we want the month portion to set where it should
+	char c = stream.get();
+	char peek_back_c = c; // only need one peek backwards (only two digits: MM)
+
+	(c >= '0' and c <= '1') ? mi += (c - '0') * order : throw "BAD LINE";
+	order /= 10;
+	c = stream.get();
+	if (peek_back_c == '0')
+		(c >= '1' and c <= '9') ? mi += (c - '0') * order : throw "BAD LINE";
+	else if (peek_back_c == '1')
+		(c >= '0' and c <= '2') ? mi += (c - '0') * order : throw "BAD LINE";
+	else
+		throw "BAD LINE";
+	return mi;
+}
+
+/*
+
+process_day( stream , month , arr )
+	1st character in range [0, 9] then (add equivalent to di) else (throw "BAD LINE") 
+	2nd character in range [0, 9] then (add equivalent to di) else (throw "BAD LINE") 
+	di in range [1, arr[month - 1]]
+	arr[1] = 28;
+
+*/
+
+int process_day(std::ifstream stream, int month, int *months)
+{
+	// possibly gonna need to catch "BAD LINE" here (propagate?)
+	char di = 0;
+	int order = 10; // 10 ^ 1 because DD sits in positions 10 ^ 0 and 10 ^ 1
+	char c = stream.get();
+
+	(c >= '1' and c <= '9') ? di += (c - '0') * order : throw "BAD LINE";
+	order /= 10;
+	c = stream.get();
+	(c >= '1' and c <= '9') ? di += (c - '0') * order : throw "BAD LINE";
+	return (di >= 1 and di <= months[month - 1]) ? di : throw "BAD LINE";
+}
