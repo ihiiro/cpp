@@ -6,7 +6,7 @@
 /*   By: yel-yaqi <yel-yaqi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/26 17:23:09 by yel-yaqi          #+#    #+#             */
-/*   Updated: 2025/02/13 17:16:20 by yel-yaqi         ###   ########.fr       */
+/*   Updated: 2025/02/13 17:23:34 by yel-yaqi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,6 +51,8 @@ int process_year(std::ifstream& stream, int *feb_ptr)
 	*/
 	if (yi / 10000 % 4 == 0)
 		*feb_ptr = 29;
+	if (yi < 20090000 or yi > 20250000)
+		throw BAD_YEAR;
 	return yi;
 }
 
