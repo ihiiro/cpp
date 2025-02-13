@@ -6,7 +6,7 @@
 /*   By: yel-yaqi <yel-yaqi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/26 17:23:09 by yel-yaqi          #+#    #+#             */
-/*   Updated: 2025/02/13 02:31:25 by yel-yaqi         ###   ########.fr       */
+/*   Updated: 2025/02/13 02:53:59 by yel-yaqi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -103,17 +103,17 @@ int process_day(std::ifstream& stream, int month, int *months)
 	int order = 10; // 10 ^ 1 because DD sits in positions 10 ^ 0 and 10 ^ 1
 	char c = stream.get();
 
-	(c >= '1' and c <= '9') ? di += (c - '0') * order : throw BAD_DAY;
+	(c >= '1' and c <= '9') ? di += (c - '0') * order : throw "first";
 	order /= 10;
 	c = stream.get();
-	(c >= '1' and c <= '9') ? di += (c - '0') * order : throw BAD_DAY;
+	(c >= '1' and c <= '9') ? di += (c - '0') * order : throw "second";
 	if (di >= 1 and di <= months[month - 1])
 	{
 		months[1] = 28; // return february to begin 28 days
 		return di;
 	}
 	months[1] = 28;
-	throw BAD_DAY;
+	throw months[month-1];
 }
 
 /*
@@ -186,19 +186,18 @@ process_line()
 
 pair process_line(std::ifstream& stream)
 {
-	int months[] = {31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31};
+	int months[12] = {31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31};
+	months[0]  = 31;
 	int month;
 	pair line_pair = {0, NULL};
 
 	line_pair.DATE += process_year(stream, &months[1]);
 	if (stream.get() != '-')
 		throw MISSING_DASH;
-	stream.get();
 	month = process_month(stream);
 	line_pair.DATE += month;
 	if (stream.get() != '-')
 		throw MISSING_DASH;
-	stream.get();
 	line_pair.DATE += process_day(stream, month, months);
 	if (stream.get() != ' ')
 		throw MISSING_SPACE;
