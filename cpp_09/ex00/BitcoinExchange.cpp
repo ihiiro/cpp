@@ -6,7 +6,7 @@
 /*   By: yel-yaqi <yel-yaqi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/26 17:23:09 by yel-yaqi          #+#    #+#             */
-/*   Updated: 2025/02/13 02:53:59 by yel-yaqi         ###   ########.fr       */
+/*   Updated: 2025/02/13 17:00:51 by yel-yaqi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -103,17 +103,17 @@ int process_day(std::ifstream& stream, int month, int *months)
 	int order = 10; // 10 ^ 1 because DD sits in positions 10 ^ 0 and 10 ^ 1
 	char c = stream.get();
 
-	(c >= '1' and c <= '9') ? di += (c - '0') * order : throw "first";
+	(c >= '1' and c <= '9') ? di += (c - '0') * order : throw BAD_DAY;
 	order /= 10;
 	c = stream.get();
-	(c >= '1' and c <= '9') ? di += (c - '0') * order : throw "second";
+	(c >= '1' and c <= '9') ? di += (c - '0') * order : throw BAD_DAY;
 	if (di >= 1 and di <= months[month - 1])
 	{
 		months[1] = 28; // return february to begin 28 days
 		return di;
 	}
-	months[1] = 28;
-	throw months[month-1];
+	// months[1] = 28; unnecessary as the array goes out of scope each line
+	throw BAD_DAY;
 }
 
 /*
@@ -198,7 +198,8 @@ pair process_line(std::ifstream& stream)
 	line_pair.DATE += month;
 	if (stream.get() != '-')
 		throw MISSING_DASH;
-	line_pair.DATE += process_day(stream, month, months);
+	/* month/100 so we get the month portion only */
+	line_pair.DATE += process_day(stream, month / 100, months);
 	if (stream.get() != ' ')
 		throw MISSING_SPACE;
 	if (stream.get() != '|')

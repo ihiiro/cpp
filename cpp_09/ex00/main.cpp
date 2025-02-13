@@ -6,7 +6,7 @@
 /*   By: yel-yaqi <yel-yaqi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/26 17:23:12 by yel-yaqi          #+#    #+#             */
-/*   Updated: 2025/02/13 02:49:54 by yel-yaqi         ###   ########.fr       */
+/*   Updated: 2025/02/13 16:41:54 by yel-yaqi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,9 +57,9 @@ int main(int argc, char **argv)
 	{pair line_pair = process_line(input_file);
 	std::cout << line_pair.DATE << std::endl;
 	std::cout << line_pair.VALUE << std::endl;}
-	catch (int i)
+	catch (char const *s)
 	{
-		std::cout << "caught: " << i << std::endl;
+		std::cout << "caught: " << s << std::endl;
 	}
 
 	/*    proto   */

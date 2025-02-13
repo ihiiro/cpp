@@ -6,7 +6,7 @@
 /*   By: yel-yaqi <yel-yaqi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/26 17:23:07 by yel-yaqi          #+#    #+#             */
-/*   Updated: 2025/02/13 02:35:14 by yel-yaqi         ###   ########.fr       */
+/*   Updated: 2025/02/13 16:53:20 by yel-yaqi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@ typedef struct
 typedef std::ifstream::traits_type traits_type;
 
 #ifndef BAD_YEAR
-#define BAD_YEAR "year should be between 2009 and 2025"
+#define BAD_YEAR "year should be between 2009 and 2025 (no space prefix)"
 #endif
 
 #ifndef BAD_MONTH
