@@ -6,18 +6,15 @@
 /*   By: yel-yaqi <yel-yaqi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/26 17:23:12 by yel-yaqi          #+#    #+#             */
-/*   Updated: 2025/02/12 02:40:04 by yel-yaqi         ###   ########.fr       */
+/*   Updated: 2025/02/13 02:37:22 by yel-yaqi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "BitcoinExchange.hpp"
 #include <iostream>
 
-#include <fstream>
-
 #include <cstring>
 
-typedef std::ifstream::traits_type traits_type;
 
 int main(int argc, char **argv)
 {
@@ -56,6 +53,10 @@ int main(int argc, char **argv)
 	ref_file.unget();
 
 
+
+	pair line_pair = process_line(input_file);
+	std::cout << line_pair.DATE << std::endl;
+	std::cout << line_pair.VALUE << std::endl;
 
 	/*    proto   */
 	
@@ -123,6 +124,8 @@ process_line()
 
 	DATE <-- A + B + C
 	VALUE <-- D (D in range [0, 1000] check in conversion time)
+	
+	return DATE,VALUE
 
 for line in stream
 	process_line()

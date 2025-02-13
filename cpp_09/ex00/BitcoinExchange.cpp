@@ -6,12 +6,14 @@
 /*   By: yel-yaqi <yel-yaqi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/26 17:23:09 by yel-yaqi          #+#    #+#             */
-/*   Updated: 2025/02/12 02:42:20 by yel-yaqi         ###   ########.fr       */
+/*   Updated: 2025/02/13 02:31:25 by yel-yaqi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <fstream>
 #include <string>
+#include <cstring>
+
 
 #include "BitcoinExchange.hpp"
 
@@ -27,7 +29,7 @@ process_year( stream , arr )
 
 */
 
-int process_year(std::ifstream stream, int *feb_ptr)
+int process_year(std::ifstream& stream, int *feb_ptr)
 {
 	int yi = 0;
 	// will allow "space" for MMDD by keeping a tail of 0s
@@ -64,10 +66,10 @@ process_month( stream )
 
 */
 
-int process_month(std::ifstream stream)
+int process_month(std::ifstream& stream)
 {
 	// possibly gonna need to catch "BAD LINE" here (propagate?)
-	char mi = 0;
+	int mi = 0;
 	int order = 1000; // 10 ^ 3 because we want the month portion to set where it should
 	char c = stream.get();
 	char peek_back_c = c; // only need one peek backwards (only two digits: MM)
@@ -94,10 +96,10 @@ process_day( stream , month , arr )
 
 */
 
-int process_day(std::ifstream stream, int month, int *months)
+int process_day(std::ifstream& stream, int month, int *months)
 {
 	// possibly gonna need to catch "BAD LINE" here (propagate?)
-	char di = 0;
+	int di = 0;
 	int order = 10; // 10 ^ 1 because DD sits in positions 10 ^ 0 and 10 ^ 1
 	char c = stream.get();
 
@@ -123,9 +125,87 @@ process_value( stream )
 
 */
 
-std::string& process_value(std::ifstream stream)
+char *process_value(std::ifstream& stream)
 {
 	std::string value_copy;
+	char *value;
+	char c = stream.get();
+	size_t size;
 
+	if (c < '0' or c > '9')
+		throw BAD_VALUE;
+	while (c != traits_type::eof() and c != '\n') // integer part
+	{
+		value_copy += c;
+		if (c == '.')
+			break;
+		if (c < '0' or c > '9')
+			throw BAD_VALUE;
+		c = stream.get();
+	}
+	size = value_copy.size() + 1;
+	value = new char[size];
+	std::strncpy(value, value_copy.c_str(), size);
+	if (c == traits_type::eof() or c == '\n')
+		return value;
+	delete value;
+	c = stream.get(); // skip '.'
+	while (c != traits_type::eof() and c != '\n') // fractional part
+	{
+		if (c < '0' or c > '9')
+			throw BAD_VALUE;
+		value_copy += c;
+		c = stream.get();
+	}
+	size = value_copy.size() + 1;
+	value = new char[size];
+	std::strncpy(value, value_copy.c_str(), size);
+	return value;
+}
+
+/*
+
+process_line()
+	process_year() <=== A
+	character after A is '-' else (throw "BAD LINE")
+	processs_month() <=== B
+	character after B is '-' else (throw "BAD LINE")
+	process_day() <=== C
+	character after C is ' ' else (throw "BAD LINE")
+	character after ' ' is '|' else (throw "BAD LINE")
+	character after '|' is ' ' else (throw "BAD LINE")
+	process_value() <=== D
+
+	DATE <-- A + B + C
+	VALUE <-- D (D in range [0, 1000] check in conversion time)
 	
+	return DATE,VALUE
+
+*/
+
+
+pair process_line(std::ifstream& stream)
+{
+	int months[] = {31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31};
+	int month;
+	pair line_pair = {0, NULL};
+
+	line_pair.DATE += process_year(stream, &months[1]);
+	if (stream.get() != '-')
+		throw MISSING_DASH;
+	stream.get();
+	month = process_month(stream);
+	line_pair.DATE += month;
+	if (stream.get() != '-')
+		throw MISSING_DASH;
+	stream.get();
+	line_pair.DATE += process_day(stream, month, months);
+	if (stream.get() != ' ')
+		throw MISSING_SPACE;
+	if (stream.get() != '|')
+		throw MISSING_PIPE;
+	if (stream.get() != ' ')
+		throw MISSING_SPACE;
+	line_pair.VALUE = process_value(stream);
+	return line_pair;
 }
