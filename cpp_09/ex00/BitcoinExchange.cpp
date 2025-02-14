@@ -6,7 +6,7 @@
 /*   By: yel-yaqi <yel-yaqi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/26 17:23:09 by yel-yaqi          #+#    #+#             */
-/*   Updated: 2025/02/14 22:20:57 by yel-yaqi         ###   ########.fr       */
+/*   Updated: 2025/02/14 23:16:03 by yel-yaqi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -230,7 +230,6 @@ pair process_line(std::ifstream& stream, double FILE_TYPE)
 
 
 
-
 			
 	c_str = process_value(stream).c_str();
 	if (c_str == NULL)
@@ -239,6 +238,8 @@ pair process_line(std::ifstream& stream, double FILE_TYPE)
 		std::exit(1);
 	}
 	line_pair.VALUE = std::atof(c_str);
+	if (less(line_pair.DATE, 20090102))
+		throw BAD_DATE;
 	if ( 
 		(more(line_pair.VALUE, 0) or equal(line_pair.VALUE, 0)) and 
 			(less(line_pair.VALUE, FILE_TYPE) or equal(line_pair.VALUE, FILE_TYPE))	) // <==> VALUE >= v and VALUE <= v

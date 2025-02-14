@@ -6,7 +6,7 @@
 /*   By: yel-yaqi <yel-yaqi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/26 17:23:12 by yel-yaqi          #+#    #+#             */
-/*   Updated: 2025/02/14 22:24:25 by yel-yaqi         ###   ########.fr       */
+/*   Updated: 2025/02/14 23:31:31 by yel-yaqi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,41 +54,53 @@ int main(int argc, char **argv)
 	input_file.unget();
 	ref_file.unget();
 
-	// try
-	// {pair line_pair = process_line(input_file, RIGHT_FILE);
-	// std::cout << line_pair.DATE << std::endl;
-	// std::cout << line_pair.VALUE << std::endl;}
-	// catch (char const *s)
-	// {
-	// 	std::cout << "caught: " << s << std::endl;
-	// }
 
+
+
+	
+	/* fill the multiset with the reference file data */
 	std::multiset<pair> ref_multiset;
-
 	try
 	{
 		for (pair line_pair = process_line(ref_file, LEFT_FILE); 
-			line_pair.DATE != traits_type::eof(); 
-			line_pair = process_line(ref_file, LEFT_FILE))
+				  line_pair.DATE != traits_type::eof(); 
+				  line_pair = process_line(ref_file, LEFT_FILE))
 			ref_multiset.insert(line_pair);
 	}
-	catch (char const *s)
+	catch (char const*) {}
+
+
+
+	/*  */
+	pair line_pair;
+	std::multiset<pair>::iterator lower_bound;
+	try
 	{
-		std::cout << s << std::endl;
+		line_pair = process_line(input_file, RIGHT_FILE);
+		lower_bound = ref_multiset.lower_bound(line_pair);
+		if ((*lower_bound).DATE != line_pair.DATE)
+			std::cout << "[" << line_pair.DATE << "] " << line_pair.VALUE * 
+	}
+	catch (char const *e) { std::cout << "error: \n\t" << e << ", next" << std::endl; }
+	while (line_pair.DATE != traits_type::eof())
+	{
+		try
+		{
+				
+		}
+		catch (char const *e) { std::cout << "error: \n\t" << e << ", next" << std::endl; }
 	}
 	
+	// std::multiset<pair>::iterator begin = ref_multiset.begin();
 
-	
-	std::multiset<pair>::iterator begin = ref_multiset.begin();
+	// // for (; begin != ref_multiset.end(); begin++)
+	// // 	std::cout << (*begin).DATE << std::endl;
 
-	// for (; begin != ref_multiset.end(); begin++)
-	// 	std::cout << (*begin).DATE << std::endl;
+	// std::cout << (*begin).DATE << std::endl;
+	// begin++;
+	// std::cout << (*begin).DATE << std::endl;
 
-	std::cout << (*begin).DATE << std::endl;
-	begin++;
-	std::cout << (*begin).DATE << std::endl;
-
-	std::cout << ref_multiset.size();
+	// std::cout << ref_multiset.size();
 
 	
 }

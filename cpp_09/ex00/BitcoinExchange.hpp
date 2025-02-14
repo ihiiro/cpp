@@ -6,7 +6,7 @@
 /*   By: yel-yaqi <yel-yaqi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/26 17:23:07 by yel-yaqi          #+#    #+#             */
-/*   Updated: 2025/02/14 21:56:35 by yel-yaqi         ###   ########.fr       */
+/*   Updated: 2025/02/14 23:17:03 by yel-yaqi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,9 +30,14 @@ typedef struct pair
 		DATE = date;
 		VALUE = value;
 	}
+	pair() {}
 }		pair;
 
 typedef std::ifstream::traits_type traits_type;
+
+#ifndef BAD_DATE
+#define BAD_DATE "lowest possible date is 2009-01-02 (for lowerbound-1 lookup safety)"
+#endif
 
 #ifndef BAD_YEAR
 #define BAD_YEAR "year should be in range [2009, 9999] (no space prefix)"
