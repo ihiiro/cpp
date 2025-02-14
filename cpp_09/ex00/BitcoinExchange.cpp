@@ -6,7 +6,7 @@
 /*   By: yel-yaqi <yel-yaqi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/26 17:23:09 by yel-yaqi          #+#    #+#             */
-/*   Updated: 2025/02/14 17:49:11 by yel-yaqi         ###   ########.fr       */
+/*   Updated: 2025/02/14 19:27:09 by yel-yaqi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -178,7 +178,7 @@ std::string process_value(std::ifstream& stream)
 
 
 
-pair process_line(std::ifstream& stream)
+pair process_line(std::ifstream& stream, double FILE_TYPE)
 {
 	int months[12] = {31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31};
 	months[0]  = 31;
@@ -186,6 +186,23 @@ pair process_line(std::ifstream& stream)
 	pair line_pair = {0, 0};
 	char const *c_str;
 
+
+	for (char c; ;) // skip header
+	{
+		if ((c = stream.get()) == '\n')
+			break;
+		if (c == traits_type::eof())
+		{
+			fatal_error("premature EOF (after header)");
+			std::exit(1);
+		}
+	}
+
+
+
+
+
+	
 	line_pair.DATE += process_year(stream, &months[1]);
 	if (stream.get() != '-')
 		throw MISSING_DASH;
@@ -195,12 +212,24 @@ pair process_line(std::ifstream& stream)
 		throw MISSING_DASH;
 	/* month/100 so we get the month portion only */
 	line_pair.DATE += process_day(stream, month / 100, months);
-	if (stream.get() != ' ')
+	if (FILE_TYPE == RIGHT_FILE)
+	{
+		if (stream.get() != ' ')
 		throw MISSING_SPACE;
-	if (stream.get() != '|')
-		throw MISSING_PIPE;
-	if (stream.get() != ' ')
-		throw MISSING_SPACE;
+		if (stream.get() != '|')
+			throw MISSING_PIPE;
+		if (stream.get() != ' ')
+			throw MISSING_SPACE_AFTER_PIPE;
+	}
+	else
+		if (stream.get() != ',')
+			throw MISSING_COMMA;
+
+
+
+
+
+			
 	c_str = process_value(stream).c_str();
 	if (c_str == NULL)
 	{
@@ -210,7 +239,7 @@ pair process_line(std::ifstream& stream)
 	line_pair.VALUE = std::atof(c_str);
 	if ( 
 		(more(line_pair.VALUE, 0) or equal(line_pair.VALUE, 0)) and 
-			(less(line_pair.VALUE, 1000) or equal(line_pair.VALUE, 1000))	) // <==> VALUE >= 0 and VALUE <= 1000
+			(less(line_pair.VALUE, FILE_TYPE) or equal(line_pair.VALUE, FILE_TYPE))	) // <==> VALUE >= v and VALUE <= v
 		return line_pair;
 	throw BAD_VALUE;
 }

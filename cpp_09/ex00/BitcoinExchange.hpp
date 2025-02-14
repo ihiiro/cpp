@@ -6,7 +6,7 @@
 /*   By: yel-yaqi <yel-yaqi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/26 17:23:07 by yel-yaqi          #+#    #+#             */
-/*   Updated: 2025/02/14 16:29:26 by yel-yaqi         ###   ########.fr       */
+/*   Updated: 2025/02/14 19:27:35 by yel-yaqi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,10 +49,25 @@ typedef std::ifstream::traits_type traits_type;
 #define MISSING_SPACE "expected a space: YYYY-MM-DD--> <--"
 #endif
 
+#ifndef MISSING_SPACE_AFTER_PIPE
+#define MISSING_SPACE_AFTER_PIPE "expected a space: YYYY-MM-DD |--> <--"
+#endif
+
 #ifndef MISSING_PIPE
 #define MISSING_PIPE "expected a pipe character: YYYY-MM-DD |"
 #endif
 
+#ifndef MISSING_COMMA
+#define MISSING_COMMA "reference file format requires comma separator (key,v): YYYY-MM-DD--->,<---V"
+#endif
+
+#ifndef RIGHT_FILE
+#define RIGHT_FILE 1e3
+#endif
+
+#ifndef LEFT_FILE
+#define LEFT_FILE 1e5
+#endif
 
 /* error printers */
 void fatal_error(char const *str);
@@ -64,4 +79,4 @@ int process_year(std::ifstream& stream, int *feb_ptr);
 int process_month(std::ifstream& stream);
 int process_day(std::ifstream& stream, int month, int *months);
 std::string process_value(std::ifstream& stream);
-pair process_line(std::ifstream& stream);
+pair process_line(std::ifstream& stream, double FILE_TYPE);

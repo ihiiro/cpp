@@ -6,7 +6,7 @@
 /*   By: yel-yaqi <yel-yaqi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/26 17:23:12 by yel-yaqi          #+#    #+#             */
-/*   Updated: 2025/02/14 16:25:38 by yel-yaqi         ###   ########.fr       */
+/*   Updated: 2025/02/14 19:26:22 by yel-yaqi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,21 +40,20 @@ int main(int argc, char **argv)
 
 	/* unopenable/empty file protection */
 	std::ifstream input_file(filename); // input file
-	if (not input_file)
-		return fatal_error("couldn't open input file for reading"), 1;
-	if (input_file.get() == traits_type::eof())
-		return usage_error("empty input file"), 1;
-	std::ifstream ref_file(ref_filename); // reference file
-	if (not ref_file)
-		return fatal_error("couldn't open reference file for reading"), 1;
-	if (ref_file.get() == traits_type::eof())
-		return usage_error("empty reference file"), 1;
-	input_file.unget();
-	ref_file.unget();
-
+	// if (not input_file)
+	// 	return fatal_error("couldn't open input file for reading"), 1;
+	// if (input_file.get() == traits_type::eof())
+	// 	return usage_error("empty input file"), 1;
+	// std::ifstream ref_file(ref_filename); // reference file
+	// if (not ref_file)
+	// 	return fatal_error("couldn't open reference file for reading"), 1;
+	// if (ref_file.get() == traits_type::eof())
+	// 	return usage_error("empty reference file"), 1;
+	// input_file.unget();
+	// ref_file.unget();
 
 	try
-	{pair line_pair = process_line(input_file);
+	{pair line_pair = process_line(input_file, RIGHT_FILE);
 	std::cout << line_pair.DATE << std::endl;
 	std::cout << line_pair.VALUE << std::endl;}
 	catch (char const *s)
