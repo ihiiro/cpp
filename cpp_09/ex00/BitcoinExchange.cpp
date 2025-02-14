@@ -6,7 +6,7 @@
 /*   By: yel-yaqi <yel-yaqi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/26 17:23:09 by yel-yaqi          #+#    #+#             */
-/*   Updated: 2025/02/13 21:53:07 by yel-yaqi         ###   ########.fr       */
+/*   Updated: 2025/02/14 17:49:11 by yel-yaqi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,14 @@
 
 #include "BitcoinExchange.hpp"
 
-/* for floating point comparisons */
+
+
+/*
+
+	
+
+*/
+
 bool equal(double a, double b)
 {
 	return std::abs(a - b) < EPSILON;
@@ -36,7 +43,14 @@ bool more(double a, double b)
 
 
 
+/*
 
+	the code below tries to comply with ISO 8601's complete representation
+	YYYYMMDD, (2009 january 1st <==> 20090101)
+	the date is built by multiplying each digit from left to right by
+	a factor of 10^n, n starts at 7 and decreases for each digit.
+
+*/
 
 
 
@@ -45,32 +59,21 @@ bool more(double a, double b)
 int process_year(std::ifstream& stream, int *feb_ptr)
 {
 	int yi = 0;
-	// will allow "space" for MMDD by keeping a tail of 0s
-	int order = 10000000; // 10 ^ 7 is the max order of magnitude in YYYYMMDD
-	char c = stream.get();
 
-	(c == '2') ? yi += (c - '0') * order : throw BAD_YEAR;
-	c = stream.get();
-	order /= 10;
-	(c == '0') ? yi += (c - '0') * order : throw BAD_YEAR;
-	c = stream.get();
-	order /= 10;
-	(c >= '0' and c <= '2') ? yi += (c - '0') * order : throw BAD_YEAR;
-	c = stream.get();
-	order /= 10;
-	(c >= '0' and c <= '9') ? yi += (c - '0') * order : throw BAD_YEAR;
-	/* dividing by 10 ^ 4 gives us the year portion
-		if it's divisible by 4 then its a leap year
-	*/
-	if (yi / 10000 % 4 == 0)
-		*feb_ptr = 29;
-	if (yi < 20090000 or yi > 20250000)
+	for (int order = 1e7; order != 1e3; order /= 1e1)
+	{
+		char c = stream.get();
+		(c >= '0' and c <= '9') ? yi += (c - '0') * order : throw BAD_YEAR;
+	}
+	if (yi < static_cast<int>(2009e4))
 		throw BAD_YEAR;
+	/* dividing by 10 ^ 4 gives us the year portion
+			if it's divisible by 4 then its a leap year
+		*/
+	if (yi / static_cast<int>(1e4) % 4 == 0)
+		*feb_ptr = 29;	
 	return yi;
 }
-
-
-
 
 
 
@@ -79,9 +82,9 @@ int process_year(std::ifstream& stream, int *feb_ptr)
 int process_month(std::ifstream& stream)
 {
 	int mi = 0;
-	int order = 1000; // 10 ^ 3 because we want the month portion to set where it should
+	int order = 1000;
 	char c = stream.get();
-	char peek_back_c = c; // only need one peek backwards (only two digits: MM)
+	char peek_back_c = c;
 
 	(c >= '0' and c <= '1') ? mi += (c - '0') * order : throw BAD_MONTH;
 	order /= 10;
@@ -110,7 +113,7 @@ int process_month(std::ifstream& stream)
 int process_day(std::ifstream& stream, int month, int *months)
 {
 	int di = 0;
-	int order = 10; // 10 ^ 1 because DD sits in positions 10 ^ 0 and 10 ^ 1
+	int order = 10;
 	char c = stream.get();
 
 	(c >= '0' and c <= '9') ? di += (c - '0') * order : throw BAD_DAY;
@@ -118,10 +121,7 @@ int process_day(std::ifstream& stream, int month, int *months)
 	c = stream.get();
 	(c >= '0' and c <= '9') ? di += (c - '0') * order : throw BAD_DAY;
 	if (di >= 1 and di <= months[month - 1])
-	{
-		months[1] = 28; // return february to begin 28 days
 		return di;
-	}
 	throw BAD_DAY;
 }
 
@@ -155,8 +155,6 @@ std::string process_value(std::ifstream& stream)
 	if (c == traits_type::eof() or c == '\n')
 		return value_copy;
 	c = stream.get(); // skip '.'
-	if (c < '0' or c > '9')
-		throw BAD_VALUE;
 	while (c != traits_type::eof() and c != '\n') // fractional part
 	{
 		if (c < '0' or c > '9')
