@@ -6,7 +6,7 @@
 /*   By: yel-yaqi <yel-yaqi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/26 17:23:07 by yel-yaqi          #+#    #+#             */
-/*   Updated: 2025/02/14 19:27:35 by yel-yaqi         ###   ########.fr       */
+/*   Updated: 2025/02/14 21:56:35 by yel-yaqi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,10 +17,19 @@
 #define EPSILON .00001
 #endif
 
-typedef struct
+typedef struct pair
 {
 	int DATE;
 	double VALUE;
+	bool operator <(pair const &rhs) const
+	{
+		return DATE < rhs.DATE;
+	}
+	pair(int date, double value)
+	{
+		DATE = date;
+		VALUE = value;
+	}
 }		pair;
 
 typedef std::ifstream::traits_type traits_type;

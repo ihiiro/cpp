@@ -6,7 +6,7 @@
 /*   By: yel-yaqi <yel-yaqi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/26 17:23:09 by yel-yaqi          #+#    #+#             */
-/*   Updated: 2025/02/14 21:12:39 by yel-yaqi         ###   ########.fr       */
+/*   Updated: 2025/02/14 22:20:57 by yel-yaqi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -140,26 +140,31 @@ std::string process_value(std::ifstream& stream)
 {
 	std::string value_copy;
 	char c = stream.get();
+	char peek_c;
 
 	if (c < '0' or c > '9')
 		throw BAD_VALUE;
-	while (c != traits_type::eof() and c != '\n') // integer part
+	while ( 1 ) // integer part
 	{
+		peek_c = stream.peek();
 		value_copy += c;
 		if (c == '.')
 			break;
 		if (c < '0' or c > '9')
 			throw BAD_VALUE;
+		if (peek_c == '\n' or peek_c == traits_type::eof())
+			return value_copy;
 		c = stream.get();
 	}
-	if (c == traits_type::eof() or c == '\n')
-		return value_copy;
-	c = stream.get(); // skip '.'
-	while (c != traits_type::eof() and c != '\n') // fractional part
+	c = stream.get(); // extract '.'
+	while ( 1 ) // fractional part
 	{
+		peek_c = stream.peek();
 		if (c < '0' or c > '9')
 			throw BAD_VALUE;
 		value_copy += c;
+		if (peek_c == '\n' or peek_c == traits_type::eof())
+			break;
 		c = stream.get();
 	}
 	return value_copy;
@@ -183,7 +188,7 @@ pair process_line(std::ifstream& stream, double FILE_TYPE)
 	int months[12] = {31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31};
 	months[0]  = 31;
 	int month;
-	pair line_pair = {0, 0};
+	pair line_pair(0, 0);
 	char const *c_str;
 
 
@@ -192,7 +197,7 @@ pair process_line(std::ifstream& stream, double FILE_TYPE)
 		if ((c = stream.get()) == '\n')
 			break;
 		if (c == traits_type::eof())
-			return line_pair;
+			return pair(traits_type::eof(), 0);
 	}
 
 
