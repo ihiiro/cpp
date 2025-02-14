@@ -6,7 +6,7 @@
 /*   By: yel-yaqi <yel-yaqi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/26 17:23:09 by yel-yaqi          #+#    #+#             */
-/*   Updated: 2025/02/14 19:27:09 by yel-yaqi         ###   ########.fr       */
+/*   Updated: 2025/02/14 21:12:39 by yel-yaqi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -187,15 +187,12 @@ pair process_line(std::ifstream& stream, double FILE_TYPE)
 	char const *c_str;
 
 
-	for (char c; ;) // skip header
+	for (char c; ;) // skip line
 	{
 		if ((c = stream.get()) == '\n')
 			break;
 		if (c == traits_type::eof())
-		{
-			fatal_error("premature EOF (after header)");
-			std::exit(1);
-		}
+			return line_pair;
 	}
 
 
