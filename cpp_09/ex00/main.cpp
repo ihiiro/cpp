@@ -6,7 +6,7 @@
 /*   By: yel-yaqi <yel-yaqi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/26 17:23:12 by yel-yaqi          #+#    #+#             */
-/*   Updated: 2025/02/14 23:31:31 by yel-yaqi         ###   ########.fr       */
+/*   Updated: 2025/02/15 01:47:05 by yel-yaqi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -79,7 +79,13 @@ int main(int argc, char **argv)
 		line_pair = process_line(input_file, RIGHT_FILE);
 		lower_bound = ref_multiset.lower_bound(line_pair);
 		if ((*lower_bound).DATE != line_pair.DATE)
-			std::cout << "[" << line_pair.DATE << "] " << line_pair.VALUE * 
+			std::cout << "[" << line_pair.DATE << "] * " << "[ " << (*--lower_bound).DATE << "] = "
+			<< line_pair.VALUE << " * " << (*lower_bound).VALUE << " = " <<
+			line_pair.VALUE * (*lower_bound).VALUE << std::endl;
+		else
+			std::cout << "[" << line_pair.DATE << "] * " << "[ " << (*lower_bound).DATE << "] = "
+				<< line_pair.VALUE << " * " << (*lower_bound).VALUE << " = " <<
+				line_pair.VALUE * (*lower_bound).VALUE << std::endl;
 	}
 	catch (char const *e) { std::cout << "error: \n\t" << e << ", next" << std::endl; }
 	while (line_pair.DATE != traits_type::eof())
