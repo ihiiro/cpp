@@ -6,7 +6,7 @@
 /*   By: yel-yaqi <yel-yaqi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/26 17:23:07 by yel-yaqi          #+#    #+#             */
-/*   Updated: 2025/02/15 03:58:03 by yel-yaqi         ###   ########.fr       */
+/*   Updated: 2025/02/15 18:31:23 by yel-yaqi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,7 +40,7 @@ typedef std::ifstream::traits_type traits_type;
 #endif
 
 #ifndef BAD_YEAR
-#define BAD_YEAR "year should be in range [2009, 9999] (no space prefix) (possibly partial data provided)"
+#define BAD_YEAR "year should be in range [2009, 9999] (no space prefix) (possibly partial data provided or empty line)"
 #endif
 
 #ifndef BAD_MONTH

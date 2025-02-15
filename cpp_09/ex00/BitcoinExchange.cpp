@@ -6,7 +6,7 @@
 /*   By: yel-yaqi <yel-yaqi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/26 17:23:09 by yel-yaqi          #+#    #+#             */
-/*   Updated: 2025/02/15 03:45:42 by yel-yaqi         ###   ########.fr       */
+/*   Updated: 2025/02/15 18:33:39 by yel-yaqi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,7 @@
 
 /*
 
-	
+	why does this have to be the case???
 
 */
 
@@ -240,7 +240,7 @@ pair process_line(std::ifstream& stream, double FILE_TYPE)
 		std::exit(1);
 	}
 	line_pair.VALUE = std::atof(c_str);
-	if (less(line_pair.DATE, 20090102))
+	if (line_pair.DATE < 20090102)
 		throw BAD_DATE;
 	if ( 
 		(more(line_pair.VALUE, 0) or equal(line_pair.VALUE, 0)) and 
