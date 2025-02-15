@@ -6,7 +6,7 @@
 /*   By: yel-yaqi <yel-yaqi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/26 17:23:09 by yel-yaqi          #+#    #+#             */
-/*   Updated: 2025/02/15 02:05:30 by yel-yaqi         ###   ########.fr       */
+/*   Updated: 2025/02/15 03:45:42 by yel-yaqi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,8 @@
 
 
 #include "BitcoinExchange.hpp"
+
+
 
 
 
@@ -245,4 +247,35 @@ pair process_line(std::ifstream& stream, double FILE_TYPE)
 			(less(line_pair.VALUE, FILE_TYPE) or equal(line_pair.VALUE, FILE_TYPE))	) // <==> VALUE >= v and VALUE <= v
 		return line_pair;
 	throw BAD_VALUE;
+}
+
+
+
+
+
+
+#include <set>
+#include <iostream>
+
+
+/* 
+
+	std::multiset is usually implemented as a self-balancing binary search tree
+	therefore lookup takes logarithmic time (the standard guarantees it regardless
+	of the actual implementation)
+
+ */
+
+void compute(std::multiset<pair>& ref_multiset, pair line_pair)
+{
+	std::multiset<pair>::iterator lower_bound = ref_multiset.lower_bound(line_pair);
+
+	if ((*lower_bound).DATE != line_pair.DATE)
+		std::cout << "[" << line_pair.DATE << "] * " << "[ " << (*--lower_bound).DATE << "] = "
+		<< line_pair.VALUE << " * " << (*lower_bound).VALUE << " = " <<
+		line_pair.VALUE * (*lower_bound).VALUE << std::endl;
+	else
+		std::cout << "[" << line_pair.DATE << "] * " << "[ " << (*lower_bound).DATE << "] = "
+			<< line_pair.VALUE << " * " << (*lower_bound).VALUE << " = " <<
+			line_pair.VALUE * (*lower_bound).VALUE << std::endl;		
 }

@@ -6,7 +6,7 @@
 /*   By: yel-yaqi <yel-yaqi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/26 17:23:07 by yel-yaqi          #+#    #+#             */
-/*   Updated: 2025/02/15 02:05:22 by yel-yaqi         ###   ########.fr       */
+/*   Updated: 2025/02/15 03:58:03 by yel-yaqi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,7 @@ typedef struct pair
 		DATE = date;
 		VALUE = value;
 	}
-	pair() {}
+	pair() { DATE = 0; VALUE = 0; }
 }		pair;
 
 typedef std::ifstream::traits_type traits_type;
@@ -40,7 +40,7 @@ typedef std::ifstream::traits_type traits_type;
 #endif
 
 #ifndef BAD_YEAR
-#define BAD_YEAR "year should be in range [2009, 9999] (no space prefix)"
+#define BAD_YEAR "year should be in range [2009, 9999] (no space prefix) (possibly partial data provided)"
 #endif
 
 #ifndef BAD_MONTH
@@ -94,3 +94,8 @@ int process_month(std::ifstream& stream);
 int process_day(std::ifstream& stream, int month, int *months);
 std::string process_value(std::ifstream& stream);
 pair process_line(std::ifstream& stream, double FILE_TYPE);
+
+
+#include <set>
+
+void compute(std::multiset<pair>& ref_multiset, pair line_pair);

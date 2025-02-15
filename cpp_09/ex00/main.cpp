@@ -6,7 +6,7 @@
 /*   By: yel-yaqi <yel-yaqi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/26 17:23:12 by yel-yaqi          #+#    #+#             */
-/*   Updated: 2025/02/15 01:47:05 by yel-yaqi         ###   ########.fr       */
+/*   Updated: 2025/02/15 03:54:41 by yel-yaqi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@
 int main(int argc, char **argv)
 {
 	if (argc != 2) // program only works with two args
-		return usage_error("./btc <filename>.txt"), 1;
+		return usage_error("./btc filename"), 1;
 
 
 	/* NULL protections */
@@ -71,42 +71,20 @@ int main(int argc, char **argv)
 
 
 
-	/*  */
+	/* compute for each line in RIGHT_FILE using the value in LEFT_FILE */
 	pair line_pair;
-	std::multiset<pair>::iterator lower_bound;
-	try
-	{
-		line_pair = process_line(input_file, RIGHT_FILE);
-		lower_bound = ref_multiset.lower_bound(line_pair);
-		if ((*lower_bound).DATE != line_pair.DATE)
-			std::cout << "[" << line_pair.DATE << "] * " << "[ " << (*--lower_bound).DATE << "] = "
-			<< line_pair.VALUE << " * " << (*lower_bound).VALUE << " = " <<
-			line_pair.VALUE * (*lower_bound).VALUE << std::endl;
-		else
-			std::cout << "[" << line_pair.DATE << "] * " << "[ " << (*lower_bound).DATE << "] = "
-				<< line_pair.VALUE << " * " << (*lower_bound).VALUE << " = " <<
-				line_pair.VALUE * (*lower_bound).VALUE << std::endl;
-	}
-	catch (char const *e) { std::cout << "error: \n\t" << e << ", next" << std::endl; }
-	while (line_pair.DATE != traits_type::eof())
+	while ( 1 )
 	{
 		try
 		{
-				
+			line_pair = process_line(input_file, RIGHT_FILE);
+			if (line_pair.DATE == traits_type::eof())
+				break;
+			compute(ref_multiset, line_pair);
 		}
-		catch (char const *e) { std::cout << "error: \n\t" << e << ", next" << std::endl; }
+		catch (char const *e) 
+		{
+			std::cout << "error: " << e << ", next" << std::endl;
+		}
 	}
-	
-	// std::multiset<pair>::iterator begin = ref_multiset.begin();
-
-	// // for (; begin != ref_multiset.end(); begin++)
-	// // 	std::cout << (*begin).DATE << std::endl;
-
-	// std::cout << (*begin).DATE << std::endl;
-	// begin++;
-	// std::cout << (*begin).DATE << std::endl;
-
-	// std::cout << ref_multiset.size();
-
-	
 }
