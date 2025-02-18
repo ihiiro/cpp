@@ -6,7 +6,7 @@
 /*   By: yel-yaqi <yel-yaqi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/26 17:23:09 by yel-yaqi          #+#    #+#             */
-/*   Updated: 2025/02/18 06:13:15 by yel-yaqi         ###   ########.fr       */
+/*   Updated: 2025/02/18 06:26:28 by yel-yaqi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -257,7 +257,7 @@ void compute(std::multiset<pair>& ref_multiset, pair line_pair)
 	std::multiset<pair>::iterator lower_bound = ref_multiset.lower_bound(line_pair);
 
 	if ((*lower_bound).DATE != line_pair.DATE)
-		std::cout << "[" << line_pair.DATE << "] * " << "[ " << (*--lower_bound).DATE << "] = "
+		std::cout << "[" << line_pair.DATE << "] * " << "[" << (*--lower_bound).DATE << "] = "
 		<< line_pair.VALUE << " * " << (*lower_bound).VALUE << " = " <<
 		line_pair.VALUE * (*lower_bound).VALUE << std::endl;
 	else
