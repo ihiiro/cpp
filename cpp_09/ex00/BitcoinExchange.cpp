@@ -6,7 +6,7 @@
 /*   By: yel-yaqi <yel-yaqi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/26 17:23:09 by yel-yaqi          #+#    #+#             */
-/*   Updated: 2025/02/15 18:33:39 by yel-yaqi         ###   ########.fr       */
+/*   Updated: 2025/02/18 04:51:13 by yel-yaqi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,14 +19,6 @@
 #include "BitcoinExchange.hpp"
 
 
-
-
-
-/*
-
-	why does this have to be the case???
-
-*/
 
 bool equal(double a, double b)
 {
@@ -56,16 +48,15 @@ bool more(double a, double b)
 
 
 
-
-
 int process_year(std::ifstream& stream, int *feb_ptr)
 {
 	int yi = 0;
 
 	for (int order = 1e7; order != 1e3; order /= 1e1)
 	{
-		char c = stream.get();
+		char c = stream.peek();
 		(c >= '0' and c <= '9') ? yi += (c - '0') * order : throw BAD_YEAR;
+		stream.get();
 	}
 	if (yi < static_cast<int>(2009e4))
 		throw BAD_YEAR;
@@ -85,18 +76,18 @@ int process_month(std::ifstream& stream)
 {
 	int mi = 0;
 	int order = 1000;
-	char c = stream.get();
+	char c = stream.peek();
 	char peek_back_c = c;
 
-	(c >= '0' and c <= '1') ? mi += (c - '0') * order : throw BAD_MONTH;
+	(c == '0' or c == '1') ? mi += (c - '0') * order : throw BAD_MONTH;
 	order /= 10;
-	c = stream.get();
+	stream.get();
+	c = stream.peek();
 	if (peek_back_c == '0')
 		(c >= '1' and c <= '9') ? mi += (c - '0') * order : throw BAD_MONTH;
 	else if (peek_back_c == '1')
 		(c >= '0' and c <= '2') ? mi += (c - '0') * order : throw BAD_MONTH;
-	else
-		throw BAD_MONTH;
+	stream.get();
 	return mi;
 }
 
@@ -116,12 +107,14 @@ int process_day(std::ifstream& stream, int month, int *months)
 {
 	int di = 0;
 	int order = 10;
-	char c = stream.get();
+	char c = stream.peek();
 
 	(c >= '0' and c <= '9') ? di += (c - '0') * order : throw BAD_DAY;
 	order /= 10;
-	c = stream.get();
+	stream.get();
+	c = stream.peek();
 	(c >= '0' and c <= '9') ? di += (c - '0') * order : throw BAD_DAY;
+	stream.get();
 	if (di >= 1 and di <= months[month - 1])
 		return di;
 	throw BAD_DAY;
@@ -208,26 +201,20 @@ pair process_line(std::ifstream& stream, double FILE_TYPE)
 
 	
 	line_pair.DATE += process_year(stream, &months[1]);
-	if (stream.get() != '-')
-		throw MISSING_DASH;
+	(stream.peek() != '-') ? throw MISSING_DASH : stream.get();
 	month = process_month(stream);
 	line_pair.DATE += month;
-	if (stream.get() != '-')
-		throw MISSING_DASH;
+	(stream.peek() != '-') ? throw MISSING_DASH : stream.get();
 	/* month/100 so we get the month portion only */
 	line_pair.DATE += process_day(stream, month / 100, months);
 	if (FILE_TYPE == RIGHT_FILE)
 	{
-		if (stream.get() != ' ')
-		throw MISSING_SPACE;
-		if (stream.get() != '|')
-			throw MISSING_PIPE;
-		if (stream.get() != ' ')
-			throw MISSING_SPACE_AFTER_PIPE;
+		(stream.peek() != ' ') ? throw MISSING_SPACE : stream.get();
+		(stream.peek() != '|') ? throw MISSING_PIPE : stream.get();
+		(stream.peek() != ' ') ? throw MISSING_SPACE_AFTER_PIPE : stream.get();
 	}
 	else
-		if (stream.get() != ',')
-			throw MISSING_COMMA;
+		(stream.peek() != ',') ? throw MISSING_COMMA : stream.get();
 
 
 
