@@ -6,7 +6,7 @@
 #    By: yel-yaqi <yel-yaqi@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/12/03 10:20:38 by yel-yaqi          #+#    #+#              #
-#    Updated: 2025/02/15 03:52:23 by yel-yaqi         ###   ########.fr        #
+#    Updated: 2025/02/18 06:03:25 by yel-yaqi         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -21,7 +21,7 @@ NAME = btc
 OFILES = $(CFILES:.cpp=.o)
 
 %.o: %.cpp
-	c++ $(CFLAGS) -c $<
+	c++  $(CFLAGS) -c $<
 
 $(NAME): $(OFILES) $(HEADERS) Makefile
 	c++ $(OFILES) -o $@

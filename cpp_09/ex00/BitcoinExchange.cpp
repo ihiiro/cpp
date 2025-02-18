@@ -6,7 +6,7 @@
 /*   By: yel-yaqi <yel-yaqi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/26 17:23:09 by yel-yaqi          #+#    #+#             */
-/*   Updated: 2025/02/18 04:51:13 by yel-yaqi         ###   ########.fr       */
+/*   Updated: 2025/02/18 06:13:15 by yel-yaqi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -129,38 +129,37 @@ int process_day(std::ifstream& stream, int month, int *months)
 
 
 
-
-
 std::string process_value(std::ifstream& stream)
 {
 	std::string value_copy;
-	char c = stream.get();
-	char peek_c;
+	char c = stream.peek();
 
 	if (c < '0' or c > '9')
 		throw BAD_VALUE;
 	while ( 1 ) // integer part
 	{
-		peek_c = stream.peek();
 		value_copy += c;
 		if (c == '.')
 			break;
+		if (c == '\n' or c == traits_type::eof())
+			return value_copy;
 		if (c < '0' or c > '9')
 			throw BAD_VALUE;
-		if (peek_c == '\n' or peek_c == traits_type::eof())
-			return value_copy;
-		c = stream.get();
+		stream.get();
+		c = stream.peek();
 	}
-	c = stream.get(); // extract '.'
+	stream.get(); // extract '.'
+	if ((c = stream.peek()) < '0' or c > '9')
+		throw BAD_VALUE;
 	while ( 1 ) // fractional part
 	{
-		peek_c = stream.peek();
+		if (c == '\n' or c == traits_type::eof())
+			break;
 		if (c < '0' or c > '9')
 			throw BAD_VALUE;
 		value_copy += c;
-		if (peek_c == '\n' or peek_c == traits_type::eof())
-			break;
-		c = stream.get();
+		stream.get();
+		c = stream.peek();
 	}
 	return value_copy;
 }
