@@ -6,7 +6,7 @@
 #    By: yel-yaqi <yel-yaqi@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/12/03 10:20:38 by yel-yaqi          #+#    #+#              #
-#    Updated: 2025/02/23 04:04:17 by yel-yaqi         ###   ########.fr        #
+#    Updated: 2025/02/23 04:25:01 by yel-yaqi         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -21,7 +21,7 @@ NAME = RPN
 OFILES = $(CFILES:.cpp=.o)
 
 %.o: %.cpp
-	c++ -g -O0 $(CFLAGS) -c $<
+	c++ $(CFLAGS) -c $<
 
 $(NAME): $(OFILES) $(HEADERS) Makefile
 	c++ $(OFILES) -o $@

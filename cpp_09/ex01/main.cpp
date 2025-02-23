@@ -6,7 +6,7 @@
 /*   By: yel-yaqi <yel-yaqi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/18 01:08:03 by yel-yaqi          #+#    #+#             */
-/*   Updated: 2025/02/23 04:22:57 by yel-yaqi         ###   ########.fr       */
+/*   Updated: 2025/02/23 04:30:21 by yel-yaqi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,7 +46,7 @@ int main(int argc, char **argv)
 	std::stack<long> stack;
 	long a;
 	long b;
-	for (size_t i = 0 ; ; i += 2)
+	for (size_t i = 0 ; argv[1][i] != '\0' ; i += 2)
 	{
 		if (argv[1][i + 1] == ' ' or argv[1][i + 1] == '\0')
 		{
