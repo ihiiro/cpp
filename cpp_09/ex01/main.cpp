@@ -6,13 +6,15 @@
 /*   By: yel-yaqi <yel-yaqi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/18 01:08:03 by yel-yaqi          #+#    #+#             */
-/*   Updated: 2025/02/24 17:17:23 by yel-yaqi         ###   ########.fr       */
+/*   Updated: 2025/02/25 06:08:10 by yel-yaqi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <iostream>
 
 #include <stack>
+
+#include <list>
 
 int main(int argc, char **argv)
 {
@@ -41,7 +43,7 @@ int main(int argc, char **argv)
 	}
 
 	/*  */
-	std::stack<long> stack;
+	std::stack<long, std::list<long> > stack;
 	long a;
 	long b;
 	for (size_t i = 0 ; argv[1][i] != '\0' ; i += 2)
