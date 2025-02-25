@@ -22,9 +22,15 @@
 
 
 
-swap( &a , &b )
+swap( &a , &b , pair_size )
 	if (*a > *b)
-		
+		while (pair_size != 0)
+			tmp = *a
+			*a = *b
+			*b = tmp
+			&a--
+			&b--
+			pair_size--
 
 
 main_chain_merge_sort( list , left , right , pair_size )
@@ -33,8 +39,8 @@ main_chain_merge_sort( list , left , right , pair_size )
 			return
 	
 	mid = left + (right - left) / 2
-	main_chain_merge_sort(list, left, mid)
-	main_chain_merge_sort(list, mid + 1, right)
+	main_chain_merge_sort(list, left, mid, pair_size / 2)
+	main_chain_merge_sort(list, mid + 1, right, pair_size / 2)
 	swap(&list[pair_size - 1], &list[2 * pair_size - 1], pair_size)
 	
 
