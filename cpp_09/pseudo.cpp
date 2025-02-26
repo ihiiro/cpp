@@ -23,25 +23,36 @@
 
 
 
-binsert ( target , S , L , R )
+bsearch ( target , S , L , R  )
 	IF ( L > R )
 		return
 	
 	m <-- floor((L + R) / 2)
 
-	IF ( target < S[m].major and m == 0 )
-		S.push_front( target )
-		return
-	IF ( target > S[m].major and m == S.len() - 1 )
-		S.push_back( target )
-		return
-	IF ( target < S[m - 1].major )
 	IF ( S[m].major < target )
 		L <-- m + 1
 	IF ( S[m].major > target )
 		R <-- m - 1
 
-	binsert ( target , S , L , R )
+	IF ( m == 0 AND S[m].major > target )
+		S.insert ( m , target )
+
+	IF ( m == S.len() - 1 AND S[m].major < target)
+		S.push_back( target )
+
+	IF ( S[m - 1].major < target AND S[m + 1] > target )
+		S.insert ( m + 1 , target )
+
+	IF ( S[m].major < target )
+
+
+
+
+	bsearch ( target , S , L , R )
+
+
+binsert ( target , S )
+
 
 insert ( container , S )
 	S_copy <-- S
@@ -56,11 +67,11 @@ insert ( container , S )
 		
 		IF ( b > S.len() )
 			IF ( odd )
-				binsert( container_last.n , S , 0 , S.len() - 1 )
+				binsert( container_last.n , S )
 			return
 
 		WHILE ( b > prev_group_end )
-			binsert ( S_copy[b].minor , S , 0 , S.len() - 1 )
+			binsert ( S_copy[b].minor , S )
 			b--
 
 
