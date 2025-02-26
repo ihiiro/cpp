@@ -23,27 +23,48 @@
 
 
 
-binsert ( target , S )
+binsert ( target , S , L , R )
+	IF ( L > R )
+		return
 	
+	m <-- floor((L + R) / 2)
+
+	IF ( target < S[m].major and m == 0 )
+		S.push_front( target )
+		return
+	IF ( target > S[m].major and m == S.len() - 1 )
+		S.push_back( target )
+		return
+	IF ( target < S[m - 1].major )
+	IF ( S[m].major < target )
+		L <-- m + 1
+	IF ( S[m].major > target )
+		R <-- m - 1
+
+	binsert ( target , S , L , R )
 
 insert ( container , S )
-	S_copy = S
-	k = 2
-	prev_group_end = 1
-	odd_container = container.len() % 2
-	container_last = container[ container.len() - 1 ]
+	S_copy <-- S
+	k <-- 2
+	prev_group_end <-- 1
+	odd_container <-- container.len() % 2
+	container_last <-- container[ container.len() - 1 ]
 
 	LOOP
-		b = compute_b ( k )
+		b <-- compute_b ( k )
+		b_copy <-- b
+		
 		IF ( b > S.len() )
 			IF ( odd )
-				binsert( container_last , S )
+				binsert( container_last.n , S , 0 , S.len() - 1 )
 			return
 
 		WHILE ( b > prev_group_end )
-			binsert ( S_copy[b] , S )
+			binsert ( S_copy[b].minor , S , 0 , S.len() - 1 )
 			b--
 
+
+		prev_group_end <-- b_copy
 		k++
 	
 
@@ -66,74 +87,5 @@ merge_insertion ( container , S )
 
 
 */
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-/*
-
-
-
-
-
-
-
-swap( container , a_idx , b_idx , pair_size )
-	if (container[a_idx] > container[b_idx])
-		while (pair_size != 0)
-			tmp = container[a_idx]
-			container[a_idx] = container[b_idx]
-			container[b_idx] = tmp
-			a_idx--;
-			b_idx--;
-			pair_size--
-
-
-main_chain_merge_sort( container , left , right , pair_size )
-	if (pair_size == 0)
-			swap(left, right, 1)
-			return
-	
-	mid = left + (right - left) / 2
-	main_chain_merge_sort(container, left, mid, pair_size / 2)
-	main_chain_merge_sort(container, mid + 1, right, pair_size / 2)
-	swap(container, left + pair_size - 1, left + 2 * pair_size - 1, pair_size)
-	
-
-merge_insert( container )
-	if (container.len() % 2 == 0)
-		main_chain_merge_sort( container , 0, container.len() - 1 ,  container.len() / 2 )
-	else
-		main_chain_merge_sort( container , 0, container.len() - 2 ,  container.len() / 2 )
-	insert_sort( container )
-
-
-	
-	
-
-
-
-
-
-
-
-
-
-*/
-
 
 
