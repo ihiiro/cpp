@@ -23,14 +23,28 @@
 
 
 
+binsert ( target , S )
+	
 
 insert ( container , S )
 	S_copy = S
 	k = 2
+	prev_group_end = 1
+	odd_container = container.len() % 2
+	container_last = container[ container.len() - 1 ]
 
 	LOOP
 		b = compute_b ( k )
-		
+		IF ( b > S.len() )
+			IF ( odd )
+				binsert( container_last , S )
+			return
+
+		WHILE ( b > prev_group_end )
+			binsert ( S_copy[b] , S )
+			b--
+
+		k++
 	
 
 merge_insertion ( container , S )
