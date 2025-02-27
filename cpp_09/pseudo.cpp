@@ -12,7 +12,11 @@
 
 
 
-
+struct atom
+{
+	int major;
+	int minor;
+};
 
 
 
@@ -29,7 +33,7 @@ binsert ( target , S , L , R , end )
 		S.insert ( L , target )
 		return
 
-	m = (L + R) / 2
+	m <-- (L + R) / 2
 
 	IF ( S[m] < target.major )
 		binsert ( target , S , m + 1 , R , end )
@@ -38,7 +42,7 @@ binsert ( target , S , L , R , end )
 
 
 insert ( target , S )
-	end = S.len() - 1
+	end <-- S.len() - 1
 	binsert ( target , S , 0 , end , end )
 
 insert ( container , S )
@@ -51,11 +55,14 @@ insert ( container , S )
 	LOOP
 		b <-- compute_b ( k )
 		b_copy <-- b
-		
+
 		IF ( b > S.len() )
 			IF ( odd )
 				insert( container_last.minor , S )
-			return
+				odd = 0
+				b--
+			ELSE
+				return
 
 		WHILE ( b > prev_group_end )
 			insert ( S_copy[b].minor , S )
@@ -73,7 +80,7 @@ merge_insertion ( container , S )
 
 	container_of_largest_in_pairs = get_from( &container )
 	merge_insertion( &container_of_largest_in_pairs , S )
-	S.push_front( S[0].minor )
+	S.insert ( 0 , S[0].minor )
 	insert( &container , S )
 
 
