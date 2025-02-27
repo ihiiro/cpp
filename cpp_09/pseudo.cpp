@@ -16,11 +16,18 @@ struct atom
 {
 	int major;
 	int minor;
+	struct atom *ptr;
 };
 
 
+struct atom *A;
+struct atom *ptr;
 
-
+while (i < 1)
+{
+	ptr = A;
+	ptr = A.ptr;
+}
 
 /*
 
@@ -47,22 +54,24 @@ insert ( target , S )
 
 insert ( container , S )  <============================ INSERT
 	S_copy <-- S
+	S_copy.erase( 0 )
 	k <-- 2
 	prev_group_end <-- 1
 	odd_container <-- container.len() % 2
 	container_last <-- container[ container.len() - 1 ]
 
 	LOOP
-		b <-- compute_b ( k )
+		b <-- compute_b ( k ) - 1
 		b_copy <-- b
 
-		IF ( b > S.len() )
+		IF ( b > S.len() - 1 )
 			IF ( odd )
 				insert( container_last.minor , S )
-				odd = 0
+			b = S.len - 1
+			WHILE ( b > prev_group_end )
+				insert ( S_copy[b].minor , S )
 				b--
-			ELSE
-				return
+			RETURN
 
 		WHILE ( b > prev_group_end )
 			insert ( S_copy[b].minor , S )
