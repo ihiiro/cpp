@@ -52,7 +52,14 @@ insert ( target , S )
 	end <-- S.len() - 1
 	binsert ( target , S , 0 , end , end )
 
-insert ( &container , &S )  <============================ INSERT
+pair_chain_lookup ( atom , R )
+	ptr <-- &atom
+	WHILE ( i < R )
+		ptr <-- ptr->pair_chain
+		i++
+	return *ptr
+
+insert ( container , &S , R )
 	main_chain <-- S <===== main_chain should not contain elements of S with a NULL pair_chain
 	k <-- 2
 	prev_group_end <-- 0
@@ -65,15 +72,17 @@ insert ( &container , &S )  <============================ INSERT
 
 		IF ( b > S.len() - 1 )
 			IF ( odd )
-				insert( container_last , S )
-			b = S.len - 1
+				INSERT ( container_last , S )
+			b = S.len() - 1
+			pairing <-- pair_chain_lookup ( main_chain[b] , R )
 			WHILE ( b > prev_group_end )
-				insert ( main_chain[b].minor , S )
+				INSERT  ( pairing , S )
 				b--
 			RETURN
 
+		pairing <-- pair_chain_lookup ( main_chain[b] , R )
 		WHILE ( b > prev_group_end )
-			insert ( main_chain[b].minor , S )
+			INSERT  ( pairing , S )
 			b--
 
 
@@ -89,16 +98,10 @@ merge_insertion ( container , &S , R )
 	container_of_largest_in_pairs = get_from( &container )
 	merge_insertion( &container_of_largest_in_pairs , &S , R + 1 )
 	
-	i <-- 0
-	ptr <-- &S[0]
 	IF ( R == 0 )
 		R <-- 1
-	WHILE ( i < R )
-		ptr <-- ptr->pair_chain
-		i++
-
-	S.insert ( 0 , *ptr )
-	insert( &container , &S )
+	S.insert ( 0 , pair_chain_lookup ( S[0] , R ) )
+	insert( &container , &S , R )
 
 
 
