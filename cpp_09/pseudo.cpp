@@ -52,9 +52,9 @@ insert ( target , S )
 	end <-- S.len() - 1
 	binsert ( target , S , 0 , end , end )
 
-insert ( container , S )  <============================ INSERT
-	S_copy <-- S
-	S_copy.erase( 0 )
+insert ( &container , &S )  <============================ INSERT
+	main_chain <-- S <===== main_chain should not contain elements of S with a NULL pair_chain
+	main_chain.erase( 0 )
 	k <-- 2
 	prev_group_end <-- 1
 	odd_container <-- container.len() % 2
@@ -69,12 +69,12 @@ insert ( container , S )  <============================ INSERT
 				insert( container_last.minor , S )
 			b = S.len - 1
 			WHILE ( b > prev_group_end )
-				insert ( S_copy[b].minor , S )
+				insert ( main_chain[b].minor , S )
 				b--
 			RETURN
 
 		WHILE ( b > prev_group_end )
-			insert ( S_copy[b].minor , S )
+			insert ( main_chain[b].minor , S )
 			b--
 
 
@@ -82,15 +82,24 @@ insert ( container , S )  <============================ INSERT
 		k++
 	
 
-merge_insertion ( container , S )
+merge_insertion ( container , &S , R )
 	if (container.len() == 1)
 		S.push( container[0] )
 		return
 
 	container_of_largest_in_pairs = get_from( &container )
-	merge_insertion( &container_of_largest_in_pairs , S )
-	S.insert ( 0 , S[0].minor )
-	insert( &container , S )
+	merge_insertion( &container_of_largest_in_pairs , &S , R + 1 )
+	
+	i <-- 0
+	ptr <-- &S[0]
+	IF ( R == 0 )
+		R <-- 1
+	WHILE ( i < R )
+		ptr <-- ptr->pair_chain
+		i++
+
+	S.insert ( 0 , *ptr )
+	insert( &container , &S )
 
 
 
