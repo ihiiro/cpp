@@ -42,7 +42,7 @@ binsert ( target , S , L , R , end )
 
 	m <-- (L + R) / 2
 
-	IF ( S[m] < target.major )
+	IF ( S[m].integer < target.integer )
 		binsert ( target , S , m + 1 , R , end )
 	ELSE
 		binsert ( target , S , L , m - 1 , end )
