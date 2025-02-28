@@ -54,9 +54,8 @@ insert ( target , S )
 
 insert ( &container , &S )  <============================ INSERT
 	main_chain <-- S <===== main_chain should not contain elements of S with a NULL pair_chain
-	main_chain.erase( 0 )
 	k <-- 2
-	prev_group_end <-- 1
+	prev_group_end <-- 0
 	odd_container <-- container.len() % 2
 	container_last <-- container[ container.len() - 1 ]
 
@@ -66,7 +65,7 @@ insert ( &container , &S )  <============================ INSERT
 
 		IF ( b > S.len() - 1 )
 			IF ( odd )
-				insert( container_last.minor , S )
+				insert( container_last , S )
 			b = S.len - 1
 			WHILE ( b > prev_group_end )
 				insert ( main_chain[b].minor , S )
@@ -110,13 +109,17 @@ merge_insertion ( container , &S , R )
 
 
 
-NOTES TO SELF
-	I'm not absolutely certain that a configuration will never have a bi > floor((n/2)) + 1
+NOTE TO SELF
+	I'm not absolutely certain that a configuration will never have a bi > floor(n/2) + 1
 	when computing bi in INSERT, but I am assuming so, and therefore, INSERT always 
 	subtracts 1 from bi that is larger than S.len() - 1 after inserting it in to S
 	then b(i - 1) and b(i - 2) ... are inserted.
 	If the assumption is false, a segmentation fault could occur, in all cases do check what bi is in 
 	the odd case inside INSERT.
+CORRECTION
+	A configuration can absolutely have a bi > floor(n/2) + 1 because the insertion ordering follows a jacobsthal series
+	whose values are independent of n.
+
 
 
 */
