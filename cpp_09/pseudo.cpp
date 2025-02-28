@@ -60,8 +60,8 @@ pair_chain_lookup ( atom , R )
 		i++
 	return *ptr
 
-insert ( container , &S , R )
-	main_chain <-- S <===== main_chain should not contain elements of S with a NULL pair_chain
+insert ( container , &S , R , M )
+	main_chain <-- S <===== main_chain is from S[M] onwards
 	k <-- 2
 	prev_group_end <-- 0
 	odd_container <-- container.len() % 2
@@ -74,7 +74,7 @@ insert ( container , &S , R )
 		IF ( b > S.len() - 1 )
 			IF ( odd )
 				INSERT ( container_last , S )
-			b = S.len() - 1
+			b = main_chain.len() - 1
 			pairing <-- pair_chain_lookup ( main_chain[b] , R )
 			WHILE ( b > prev_group_end )
 				INSERT  ( pairing , S )
@@ -91,7 +91,7 @@ insert ( container , &S , R )
 		k++
 	
 
-pairwise_reduce ( container )
+pairwise_reduce ( container , M )
 	i <-- 0
 	reduced <-- NOTHING
 	smaller <-- NEW ATOM
@@ -103,9 +103,9 @@ pairwise_reduce ( container )
 		ELSE
 			larger <-- container[i]
 			*smaller <-- container[i + 1]
-		smaller->pair_chain = NULL
 		ptr <-- &larger
-		WHILE ( ptr->pair_chain != NULL )
+		j <-- 0
+		WHILE ( j < M )
 			ptr <-- ptr->pair_chain
 		ptr->pair_chain <-- smaller
 		reduced.push_back( larger )
@@ -113,15 +113,16 @@ pairwise_reduce ( container )
 	
 	return reduced
 
-merge_insertion ( container , &S , R )
+merge_insertion ( container , &S , R , M )
 	if (container.len() == 1)
 		S.push( container[0] )
+		M <-- 1
 		return
 
-	container_of_largest_in_pairs = pairwise_reduce ( &container )
+	container_of_largest_in_pairs = pairwise_reduce ( &container , M )
 	merge_insertion( &container_of_largest_in_pairs , &S , R + 1 )
 	S.insert ( 0 , pair_chain_lookup ( S[0] , R ) )
-	insert( &container , &S , R )
+	insert( &container , &S , R , M)
 
 
 
