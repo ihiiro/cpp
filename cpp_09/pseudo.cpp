@@ -94,19 +94,20 @@ insert ( container , &S , R )
 pairwise_reduce ( container )
 	i <-- 0
 	reduced <-- NOTHING
+	smaller <-- NEW ATOM
 
 	WHILE ( i + 1 < container.len() )
 		IF ( container[i].integer < container[i + 1].integer )
 			larger <-- container[i + 1]
-			smaller <-- container[i]
+			*smaller <-- container[i]
 		ELSE
 			larger <-- container[i]
-			smaller <-- container[i + 1]
-		smaller.pair_chain = NULL
+			*smaller <-- container[i + 1]
+		smaller->pair_chain = NULL
 		ptr <-- &larger
 		WHILE ( ptr->pair_chain != NULL )
 			ptr <-- ptr->pair_chain
-		ptr->pair_chain <-- 
+		ptr->pair_chain <-- smaller
 		i += 2
 
 merge_insertion ( container , &S , R )
