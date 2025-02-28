@@ -61,7 +61,7 @@ pair_chain_lookup ( atom , R )
 	return *ptr
 
 insert ( container , &S , R , M )
-	main_chain <-- S <===== main_chain is from S[M] onwards
+	main_chain <-- S <===== main_chain is from S[*M] onwards
 	k <-- 2
 	prev_group_end <-- 0
 	odd_container <-- container.len() % 2
@@ -71,7 +71,7 @@ insert ( container , &S , R , M )
 		b <-- compute_b ( k ) - 1
 		b_copy <-- b
 
-		IF ( b > S.len() - 1 )
+		IF ( b > main_chain.len() - 1 )
 			IF ( odd )
 				INSERT ( container_last , S )
 			b = main_chain.len() - 1
@@ -113,14 +113,15 @@ pairwise_reduce ( container , M )
 	
 	return reduced
 
-merge_insertion ( container , &S , R , M )
+merge_insertion ( container , &S , R , &M )
 	if (container.len() == 1)
 		S.push( container[0] )
-		M <-- 1
+		M <-- 0
 		return
 
 	container_of_largest_in_pairs = pairwise_reduce ( &container , M )
 	merge_insertion( &container_of_largest_in_pairs , &S , R + 1 )
+	(*M)++
 	S.insert ( 0 , pair_chain_lookup ( S[0] , R ) )
 	insert( &container , &S , R , M)
 
