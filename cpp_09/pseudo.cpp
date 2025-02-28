@@ -92,7 +92,22 @@ insert ( container , &S , R )
 	
 
 pairwise_reduce ( container )
-	
+	i <-- 0
+	reduced <-- NOTHING
+
+	WHILE ( i + 1 < container.len() )
+		IF ( container[i].integer < container[i + 1].integer )
+			larger <-- container[i + 1]
+			smaller <-- container[i]
+		ELSE
+			larger <-- container[i]
+			smaller <-- container[i + 1]
+		smaller.pair_chain = NULL
+		ptr <-- &larger
+		WHILE ( ptr->pair_chain != NULL )
+			ptr <-- ptr->pair_chain
+		ptr->pair_chain <-- 
+		i += 2
 
 merge_insertion ( container , &S , R )
 	if (container.len() == 1)
@@ -101,9 +116,6 @@ merge_insertion ( container , &S , R )
 
 	container_of_largest_in_pairs = pairwise_reduce ( &container )
 	merge_insertion( &container_of_largest_in_pairs , &S , R + 1 )
-	
-	IF ( R == 0 )
-		R <-- 1
 	S.insert ( 0 , pair_chain_lookup ( S[0] , R ) )
 	insert( &container , &S , R )
 
