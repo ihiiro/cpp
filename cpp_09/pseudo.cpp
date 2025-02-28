@@ -48,12 +48,13 @@ binsert ( target , S , L , R , end )
 		binsert ( target , S , L , m - 1 , end )
 
 
-insert ( target , S )
+INSERT ( target , S )
 	end <-- S.len() - 1
 	binsert ( target , S , 0 , end , end )
 
 pair_chain_lookup ( atom , R )
 	ptr <-- &atom
+	i <-- 0
 	WHILE ( i < R )
 		ptr <-- ptr->pair_chain
 		i++
@@ -90,12 +91,15 @@ insert ( container , &S , R )
 		k++
 	
 
+pairwise_reduce ( container )
+	
+
 merge_insertion ( container , &S , R )
 	if (container.len() == 1)
 		S.push( container[0] )
 		return
 
-	container_of_largest_in_pairs = get_from( &container )
+	container_of_largest_in_pairs = pairwise_reduce ( &container )
 	merge_insertion( &container_of_largest_in_pairs , &S , R + 1 )
 	
 	IF ( R == 0 )
