@@ -108,7 +108,10 @@ pairwise_reduce ( container )
 		WHILE ( ptr->pair_chain != NULL )
 			ptr <-- ptr->pair_chain
 		ptr->pair_chain <-- smaller
+		reduced.push_back( larger )
 		i += 2
+	
+	return reduced
 
 merge_insertion ( container , &S , R )
 	if (container.len() == 1)
