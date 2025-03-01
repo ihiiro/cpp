@@ -6,7 +6,7 @@
 /*   By: yel-yaqi <yel-yaqi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/01 02:42:28 by yel-yaqi          #+#    #+#             */
-/*   Updated: 2025/03/01 04:38:32 by yel-yaqi         ###   ########.fr       */
+/*   Updated: 2025/03/01 05:05:52 by yel-yaqi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -103,6 +103,7 @@ ATOM* pair_chain_lookup ( ATOM atom , int R )
 template < typename T >
 void insert ( T& container , T& S , int R )
 {
+	// std::cout << "ffffff" << std::endl;
 
 	T main_chain = container;
 	int k = 2;
@@ -160,6 +161,9 @@ template < typename T >
 T pairwise_reduce ( T& container , int R )
 {
 	
+	std::cout << "\tpairwise_reduce()" << std::endl;
+
+
 	T reduced;
 	ATOM *smaller = new ATOM;
 	ATOM larger;
@@ -179,15 +183,18 @@ T pairwise_reduce ( T& container , int R )
 			*smaller = container [ i + 1 ];
 		}
 		ptr = &larger;
-		for ( int j = 0 ; j < R ; j++ )
+		for ( int j = 0 ; j < R - 1 ; j++ )
 			ptr = ptr->pair_chain;
-		// std::cout << "fffff" << std::endl;
+		std::cout << "\tcontainer size: " << container.size() << std::endl;
 		// if (ptr == NULL)
 		// 	std::exit(1);
-		ptr = smaller;
+		// if ( ptr == NULL )
+		// 	std::exit ( 1 );
+		ptr->pair_chain = smaller;
 		reduced.push_back ( larger );
 		
 	}
+
 	return reduced;
 	
 }
@@ -203,10 +210,10 @@ T pairwise_reduce ( T& container , int R )
 template < typename T >
 void merge_insertion ( T& container , T& S , int R )
 {
-	
+	std::cout << "RECURSION DEPTH: " << R << std::endl;
 	if ( container.size() == 1 )
 	{
-
+		std::cout << "\tREACHED BASE" << std::endl;
 		S.push_back( container[ 0 ] );
 		return;
 		
@@ -214,6 +221,9 @@ void merge_insertion ( T& container , T& S , int R )
 
 	T container_of_largest_in_pairs = pairwise_reduce ( container , R );
 	merge_insertion ( container_of_largest_in_pairs , S , R + 1 );
+
+	
+
 	ATOM *a1_pairing = pair_chain_lookup ( S[ 0 ] , R );
 	if ( a1_pairing != NULL )
 		S.insert ( S.begin() , *a1_pairing );
