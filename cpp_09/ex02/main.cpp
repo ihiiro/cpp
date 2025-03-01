@@ -6,15 +6,14 @@
 /*   By: yel-yaqi <yel-yaqi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/01 02:41:11 by yel-yaqi          #+#    #+#             */
-/*   Updated: 2025/03/01 04:02:09 by yel-yaqi         ###   ########.fr       */
+/*   Updated: 2025/03/01 04:40:01 by yel-yaqi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "PmergeMe.hpp"
 
 #include <vector>
-
-
+#include <iostream>
 
 int main(int argc, char **argv)
 {
@@ -22,11 +21,15 @@ int main(int argc, char **argv)
 	std::vector < ATOM > X;
 
 	X.push_back ( (ATOM){ 1 , NULL } );
+	X.push_back ( (ATOM){ 3 , NULL } );
+	X.push_back ( (ATOM){ 0 , NULL } );
 
 	std::vector < ATOM > S;
 
 	
 	merge_insertion < std::vector<ATOM> > ( X , S , 1 );
+
+	std::cout << S.size() << std::endl;
 
 	argc++ ; (void)argv;
 
