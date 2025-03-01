@@ -61,9 +61,9 @@ pair_chain_lookup ( atom , R )
 	return *ptr
 
 insert ( container , &S , R , M )
-	main_chain <-- S <===== main_chain is from S[M] onwards
+	main_chain <-- S <===== main_chain is S[M] onwards
 	k <-- 2
-	prev_group_end <-- 0
+	prev_group_end <-- M
 	odd_container <-- container.len() % 2
 	container_last <-- container[ container.len() - 1 ]
 
