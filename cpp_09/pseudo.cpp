@@ -58,7 +58,7 @@ pair_chain_lookup ( atom , R )
 	WHILE ( i < R )
 		ptr <-- ptr->pair_chain
 		i++
-	return *ptr
+	return ptr
 
 insert ( container , &S , R )
 	main_chain <-- S
@@ -118,7 +118,7 @@ merge_insertion ( container , &S , R )
 		S.push( container[0] )
 		return
 
-	container_of_largest_in_pairs = pairwise_reduce ( &container , R )
+	container_of_largest_in_pairs <-- pairwise_reduce ( &container , R )
 	merge_insertion( &container_of_largest_in_pairs , &S , R + 1 )
 	a1_pairing <-- pair_chain_lookup ( S[0] , R )
 	IF ( a1_pairing != NULL )
