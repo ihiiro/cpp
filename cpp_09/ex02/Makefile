@@ -6,13 +6,13 @@
 #    By: yel-yaqi <yel-yaqi@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/12/03 10:20:38 by yel-yaqi          #+#    #+#              #
-#    Updated: 2025/03/01 02:30:02 by yel-yaqi         ###   ########.fr        #
+#    Updated: 2025/03/01 03:57:38 by yel-yaqi         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 CFLAGS = -std=c++98 -Wall -Wextra -Werror
 
-CFILES = main.cpp PmergeMe.cpp
+CFILES = main.cpp 
 
 HEADERS = PmergeMe.hpp
 
