@@ -73,7 +73,7 @@ insert ( container , &S , R )
 
 		IF ( b > main_chain.len() - 1 )
 			b = main_chain.len() - 1
-			IF ( odd )
+			IF ( odd_container )
 				INSERT ( container_last , S )
 			pairing <-- pair_chain_lookup ( main_chain[b] , R )
 			WHILE ( b > prev_group_end )
@@ -107,6 +107,7 @@ pairwise_reduce ( container , R )
 		j <-- 0
 		WHILE ( j < R )
 			ptr <-- ptr->pair_chain
+			j++
 		ptr->pair_chain <-- smaller
 		reduced.push_back( larger )
 		i += 2
