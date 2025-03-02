@@ -1,0 +1,9 @@
+* the pair_chain design implies there should be memory issues 
+	because the containers will go out of scope and thus be freed 
+	after each recursion depth, which means that any pair_chain pointers
+	are automatically invalidated.
+	(this does not appear to be the case for some reason, investigate)
+
+
+* binsert is probably wrong , because the number of comparisons seems
+	to be more than necessary

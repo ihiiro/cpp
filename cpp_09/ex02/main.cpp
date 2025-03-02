@@ -6,7 +6,7 @@
 /*   By: yel-yaqi <yel-yaqi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/01 02:41:11 by yel-yaqi          #+#    #+#             */
-/*   Updated: 2025/03/01 04:56:24 by yel-yaqi         ###   ########.fr       */
+/*   Updated: 2025/03/02 14:32:30 by yel-yaqi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,11 +20,16 @@ int main(int argc, char **argv)
 	
 	std::vector < ATOM > X;
 
+	X.push_back ( (ATOM){ 9 , NULL } );
 	X.push_back ( (ATOM){ 1 , NULL } );
 	X.push_back ( (ATOM){ 3 , NULL } );
 	X.push_back ( (ATOM){ 0 , NULL } );
 	X.push_back ( (ATOM){ 4 , NULL } );
-	X.push_back ( (ATOM){ 9 , NULL } );
+	X.push_back ( (ATOM){ 5 , NULL } );
+
+	// [1, 3, 0, 4, 9]
+	// [3, 4]
+	// [4]
 
 	std::vector < ATOM > S;
 
@@ -32,6 +37,9 @@ int main(int argc, char **argv)
 	merge_insertion < std::vector<ATOM> > ( X , S , 1 );
 
 	// std::cout << S.size() << std::endl;
+
+	for ( size_t i = 0 ; i < S.size() ; i++ )
+		std::cout << S [ i ].integer << ",";
 
 	argc++ ; (void)argv;
 

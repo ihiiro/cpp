@@ -6,7 +6,7 @@
 #    By: yel-yaqi <yel-yaqi@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/12/03 10:20:38 by yel-yaqi          #+#    #+#              #
-#    Updated: 2025/03/01 04:34:18 by yel-yaqi         ###   ########.fr        #
+#    Updated: 2025/03/02 12:24:24 by yel-yaqi         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -23,7 +23,7 @@ OFILES = $(CFILES:.cpp=.o)
 %.o: %.cpp
 	c++ $(CFLAGS) -c $<
 
-$(NAME): $(OFILES) $(HEADERS) Makefile
+$(NAME): $(OFILES) $(HEADERS) Makefile PmergeMe.tpp
 	c++ $(OFILES) -o $@
 
 all: $(NAME)
