@@ -6,7 +6,7 @@
 /*   By: yel-yaqi <yel-yaqi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/01 02:41:11 by yel-yaqi          #+#    #+#             */
-/*   Updated: 2025/03/02 15:06:55 by yel-yaqi         ###   ########.fr       */
+/*   Updated: 2025/03/02 17:52:13 by yel-yaqi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,11 +21,61 @@ int main(int argc, char **argv)
 	std::vector < ATOM > X;
 
 	X.push_back ( (ATOM){ 9 , NULL } );
+	X.push_back ( (ATOM){ 9 , NULL } );
+	X.push_back ( (ATOM){ 9 , NULL } );
+	X.push_back ( (ATOM){ 9 , NULL } );
+	X.push_back ( (ATOM){ 9 , NULL } );
+	X.push_back ( (ATOM){ 9 , NULL } );
+	X.push_back ( (ATOM){ 9 , NULL } );
+	X.push_back ( (ATOM){ 9 , NULL } );
+	X.push_back ( (ATOM){ 9 , NULL } );
+	X.push_back ( (ATOM){ 9 , NULL } );
+	X.push_back ( (ATOM){ 9 , NULL } );
+	X.push_back ( (ATOM){ 9 , NULL } );
+	X.push_back ( (ATOM){ 9 , NULL } );
+	X.push_back ( (ATOM){ 9 , NULL } );
+	X.push_back ( (ATOM){ 9 , NULL } );
+	X.push_back ( (ATOM){ 9 , NULL } );
 	X.push_back ( (ATOM){ 1 , NULL } );
 	X.push_back ( (ATOM){ 3 , NULL } );
 	X.push_back ( (ATOM){ 0 , NULL } );
+	X.push_back ( (ATOM){ 0 , NULL } );
+	X.push_back ( (ATOM){ 0 , NULL } );
+	X.push_back ( (ATOM){ 0 , NULL } );
+	X.push_back ( (ATOM){ 0 , NULL } );
+	X.push_back ( (ATOM){ 0 , NULL } );
+	X.push_back ( (ATOM){ 0 , NULL } );
+	X.push_back ( (ATOM){ 0 , NULL } );
+	X.push_back ( (ATOM){ 0 , NULL } );
+	X.push_back ( (ATOM){ 0 , NULL } );
+	X.push_back ( (ATOM){ 0 , NULL } );
+	X.push_back ( (ATOM){ 0 , NULL } );
+	X.push_back ( (ATOM){ 0 , NULL } );
+	X.push_back ( (ATOM){ 0 , NULL } );
+	X.push_back ( (ATOM){ 0 , NULL } );
+	X.push_back ( (ATOM){ 0 , NULL } );
+	X.push_back ( (ATOM){ 0 , NULL } );
+	X.push_back ( (ATOM){ 0 , NULL } );
+	X.push_back ( (ATOM){ 0 , NULL } );
+	X.push_back ( (ATOM){ 0 , NULL } );
+	X.push_back ( (ATOM){ 0 , NULL } );
+	X.push_back ( (ATOM){ 0 , NULL } );
+	X.push_back ( (ATOM){ 0 , NULL } );
+	X.push_back ( (ATOM){ 0 , NULL } );
+	X.push_back ( (ATOM){ 0 , NULL } );
+	X.push_back ( (ATOM){ 0 , NULL } );
+	X.push_back ( (ATOM){ 0 , NULL } );
+	X.push_back ( (ATOM){ 0 , NULL } );
+	X.push_back ( (ATOM){ 0 , NULL } );
+	X.push_back ( (ATOM){ 0 , NULL } );
+	X.push_back ( (ATOM){ 0 , NULL } );
+	X.push_back ( (ATOM){ 0 , NULL } );
 	X.push_back ( (ATOM){ 4 , NULL } );
 	X.push_back ( (ATOM){ 5 , NULL } );
+	X.push_back ( (ATOM){ 7 , NULL } );
+	X.push_back ( (ATOM){ 7 , NULL } );
+	X.push_back ( (ATOM){ 7 , NULL } );
+	X.push_back ( (ATOM){ 7 , NULL } );
 	X.push_back ( (ATOM){ 7 , NULL } );
 	X.push_back ( (ATOM){ 2 , NULL } );
 
@@ -36,12 +86,12 @@ int main(int argc, char **argv)
 	std::vector < ATOM > S;
 
 	
-	merge_insertion < std::vector<ATOM> > ( X , S , 1 );
+	merge_insertion < std::vector<ATOM> > ( X , S , 0 );
 
 	// std::cout << S.size() << std::endl;
 
 	for ( size_t i = 0 ; i < S.size() ; i++ )
-		std::cout << S [ i ].integer << ",";
+		std::cout << S [ i ].integer << std::endl;
 
 	argc++ ; (void)argv;
 
