@@ -6,25 +6,18 @@
 /*   By: yel-yaqi <yel-yaqi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/01 02:42:28 by yel-yaqi          #+#    #+#             */
-/*   Updated: 2025/03/02 17:54:08 by yel-yaqi         ###   ########.fr       */
+/*   Updated: 2025/03/02 21:38:04 by yel-yaqi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 
 
+#include "PmergeMe.hpp"
 
 #include <iostream>
 
-
-
-
-
-#include "PmergeMe.hpp"
-
 #include <cmath>
 #include <cstdlib>
-
-#include <vector>
 
 size_t compute_b ( int k )
 {
@@ -48,7 +41,12 @@ int sum ( int R )
 template < typename T >
 void binsert ( ATOM target , T& S , long L , long R , long end )
 {
-
+	
+	std::cout << "S <-- " << "[ ";
+	for ( size_t i = 0; i < S.size() ; i++ )
+		std::cout << S [ i ].integer << " ";
+	std::cout << "]" << std::endl;
+	std::cout << "inserting target " << target.integer << std::endl << std::endl;
 	size_t m = ( L + R ) / 2;
 
 	if ( L > end )
@@ -63,8 +61,13 @@ void binsert ( ATOM target , T& S , long L , long R , long end )
 		return;
 	}
 
+	// std::cout << "c" << std::endl;
 	if ( S [ m ].integer < target.integer )
+	{
+		
 		binsert ( target , S , m + 1 , R , end );
+		
+	}
 	else
 		binsert ( target , S , L , m - 1 , end );
 
@@ -84,7 +87,6 @@ void INSERT ( ATOM target , T& S )
 	size_t end = S.size() - 1;
 	binsert ( target , S , 0 , end , end );
 
-	
 }
 
 
@@ -140,9 +142,13 @@ void insert ( T& container , T& S , int R )
 			b = main_chain.size() - 1;
 			if ( odd_container )
 				INSERT ( container_last , S );
-			pairing = pair_chain_lookup ( main_chain [ b ] , R );
-			while ( b-- > prev_group_end )
+			while ( b > prev_group_end )
+			{
+				pairing = pair_chain_lookup ( main_chain [ b ] , R );
 				INSERT ( *pairing , S );
+				b--;
+			}
+				
 			return;
 		}
 
@@ -171,29 +177,29 @@ T pairwise_reduce ( T& container , int R )
 	
 	T reduced;
 	ATOM *smaller;
-	ATOM larger;
+	ATOM *larger;
 	ATOM *ptr;
 	int chain_length;
-	
+
 	for ( size_t i = 0 ; i + 1 < container.size() ; i += 2 )
 	{
-		
+		// std::cout << "c" << std::endl;
 		if ( container [ i ].integer < container [ i + 1 ].integer )
 		{
-			larger = container [ i + 1 ];
+			larger = &container [ i + 1 ];
 			smaller = &container [ i ];
 		}
 		else
 		{
-			larger = container [ i ];
+			larger = &container [ i ];
 			smaller = &container [ i + 1 ];
 		}
-		ptr = &larger;
+		ptr = larger;
 		chain_length = sum ( R );
 		for ( int j = 0 ; j < chain_length ; j++ )
 			ptr = ptr->pair_chain;
 		ptr->pair_chain = smaller;		
-		reduced.push_back ( larger );
+		reduced.push_back ( *larger );
 		
 	}
 
@@ -223,9 +229,11 @@ void merge_insertion ( T& container , T& S , int R )
 	merge_insertion ( container_of_largest_in_pairs , S , R + 1 );
 	ATOM *a1_pairing = pair_chain_lookup ( S[ 0 ] , R );
 
+	std::cout << ""
 	if ( a1_pairing != NULL )
 		S.insert ( S.begin() , *a1_pairing );
 	
 	insert ( container , S , R );
+	
 
 }

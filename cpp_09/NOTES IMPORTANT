@@ -3,6 +3,10 @@
 	after each recursion depth, which means that any pair_chain pointers
 	are automatically invalidated.
 	(this does not appear to be the case for some reason, investigate)
+* CORRECTION
+	the containers will go out of scope, the elements have been iserted in to container S.
+	furthermore, pair_chains are not invalidated 
+	
 
 
 * binsert is probably wrong , because the number of comparisons seems
