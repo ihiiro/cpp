@@ -6,7 +6,7 @@
 /*   By: yel-yaqi <yel-yaqi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/01 02:41:11 by yel-yaqi          #+#    #+#             */
-/*   Updated: 2025/03/02 14:32:30 by yel-yaqi         ###   ########.fr       */
+/*   Updated: 2025/03/02 15:06:55 by yel-yaqi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,6 +26,8 @@ int main(int argc, char **argv)
 	X.push_back ( (ATOM){ 0 , NULL } );
 	X.push_back ( (ATOM){ 4 , NULL } );
 	X.push_back ( (ATOM){ 5 , NULL } );
+	X.push_back ( (ATOM){ 7 , NULL } );
+	X.push_back ( (ATOM){ 2 , NULL } );
 
 	// [1, 3, 0, 4, 9]
 	// [3, 4]

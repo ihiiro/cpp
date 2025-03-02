@@ -75,8 +75,8 @@ insert ( container , &S , R )
 			b = main_chain.len() - 1
 			IF ( odd_container )
 				INSERT ( container_last , S )
-			pairing <-- pair_chain_lookup ( main_chain[b] , R )
 			WHILE ( b > prev_group_end )
+				pairing <-- pair_chain_lookup ( main_chain[b] , R )
 				INSERT  ( pairing , S )
 				b--
 			RETURN

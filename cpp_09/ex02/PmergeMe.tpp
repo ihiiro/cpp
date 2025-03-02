@@ -6,7 +6,7 @@
 /*   By: yel-yaqi <yel-yaqi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/01 02:42:28 by yel-yaqi          #+#    #+#             */
-/*   Updated: 2025/03/02 14:59:05 by yel-yaqi         ###   ########.fr       */
+/*   Updated: 2025/03/02 15:10:09 by yel-yaqi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -146,10 +146,13 @@ void insert ( T& container , T& S , int R )
 			return;
 		}
 
-		pairing = pair_chain_lookup ( main_chain[ b ] , R );
 		while ( b > prev_group_end )
 		{
-			std::cout << "chain owner is " << main_chain [ b ].integer << std::endl;
+			pairing = pair_chain_lookup ( main_chain[ b ] , R );
+			// std::cout << "chain owner is " << main_chain [ b ].integer << std::endl;
+			// std::cout << "paired with " << main_chain[ b ].pair_chain->integer << std::endl;
+			// std::cout << "pairing is " << pairing->integer << std::endl;
+			// std::cout << "on DEPTH " << R << std::endl;
 			INSERT ( *pairing , S );
 			b--;
 		}
@@ -215,7 +218,7 @@ T pairwise_reduce ( T& container , int R )
 
 		
 
-		// smallerpair_chain  = NULL;
+		// smaller->pair_chain  = NULL;
 		std::cout << "\t";
 		for ( ptr = &larger ; ptr ; ptr = ptr->pair_chain )
 			std::cout << ptr->integer << "-->";
