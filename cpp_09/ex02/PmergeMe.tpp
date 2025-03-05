@@ -6,7 +6,7 @@
 /*   By: yel-yaqi <yel-yaqi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/01 02:42:28 by yel-yaqi          #+#    #+#             */
-/*   Updated: 2025/03/03 15:26:15 by yel-yaqi         ###   ########.fr       */
+/*   Updated: 2025/03/05 15:33:04 by yel-yaqi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,28 +31,30 @@ size_t compute_b ( int k )
 
 
 template < typename T >
-void binsert ( ATOM target , T& S , long L , long R , long end )
+size_t binsert ( ATOM target , T& S , long L , long R , long end )
 {
 	
 	size_t m = ( L + R ) / 2;
 
-	if ( L > end )
-	{
-		S.push_back ( target );
-		return;
-	}
+	// if ( L > end )
+	// {
+	// 	// S.push_back ( target );
+	// 	// target.p = 0;
+	// 	return end + 1;
+	// }
 
 	if ( L > R )
 	{
 		S.insert ( S.begin() + L , target );
-		return;
+		// target.p = 0;
+		return L;
 	}
 
 	// std::cout << "c" << std::endl;
 	if ( S [ m ].integer < target.integer )
-		binsert ( target , S , m + 1 , R , end );
+		return binsert ( target , S , m + 1 , R , end );
 	else
-		binsert ( target , S , L , m - 1 , end );
+		return binsert ( target , S , L , m - 1 , end );
 
 }
 
@@ -64,11 +66,10 @@ void binsert ( ATOM target , T& S , long L , long R , long end )
 
 
 template < typename T >
-void INSERT ( ATOM target , T& S )
+size_t INSERT ( ATOM target , T& S , long end )
 {
 
-	size_t end = S.size() - 1;
-	binsert ( target , S , 0 , end , end );
+	return binsert ( target , S , 0 , end , end );
 
 }
 
@@ -110,6 +111,10 @@ void insert ( T& container , T& S , int R )
 	ATOM* pairing;
 	size_t b;
 	size_t b_copy;
+	size_t insertion_index;
+
+	for ( size_t i = 0 ; i < main_chain.size() ; i++ )
+		main_chain [ i ].p = 0;
 
 	while ( 1 )
 	{
@@ -122,12 +127,34 @@ void insert ( T& container , T& S , int R )
 
 			b = main_chain.size() - 1;
 			if ( odd_container )
-				INSERT ( container_last , S );
+			{
+				
+				// std::cout << "A" << std::endl;
+				// std::cout << "main_chain[b] " << main_chain [ b ].integer << std::endl;
+				// std::cout << "b <- " << b << std::endl;
+				// std::cout << "main_chain[b].p " << main_chain[ b ].p << std::endl;
+				// std::cout << "S[b + main_chain[b].p] " << S [ b + main_chain [ b ].p ].integer << "\n\n";
+				insertion_index = INSERT ( container_last , S , S.size() - 1 );
+				for ( size_t i = 0 ; i < main_chain.size() ; i++ )
+					if ( insertion_index <= ( i + main_chain [ i ].p ) )
+						main_chain [ i ].p++;				
+				
+			}
 			while ( b > prev_group_end )
 			{
+				
+				// std::cout << "B" << std::endl;
 				pairing = pair_chain_lookup ( main_chain [ b ] , R );
-				INSERT ( *pairing , S );
+				// std::cout << "main_chain[b] " << main_chain [ b ].integer << std::endl;
+				// std::cout << "b <- " << b << std::endl;
+				// std::cout << "main_chain[b].p " << main_chain[ b ].p << std::endl;
+				// std::cout << "S[b + main_chain[b].p] " << S [ b + main_chain [ b ].p ].integer << "\n\n";
+				insertion_index = INSERT ( *pairing , S , ( b + main_chain [ b ].p ) - 1 );
+				for ( size_t i = 0 ; i < main_chain.size() ; i++ )
+					if ( insertion_index <= ( i + main_chain [ i ].p ) )
+						main_chain [ i ].p++;
 				b--;
+
 			}
 
 			return;
@@ -137,8 +164,18 @@ void insert ( T& container , T& S , int R )
 		while ( b > prev_group_end )
 		{
 			
+			// std::cout << "C" << std::endl;
 			pairing = pair_chain_lookup ( main_chain[ b ] , R );
-			INSERT ( *pairing , S );
+			// std::cout << "insertion_end <- " << ( b + main_chain [ b ].p ) - 1 << std::endl;
+			// std::cout << "main_chain[b] " << main_chain [ b ].integer << std::endl;
+			// std::cout << "pairing <- " << pairing->integer << std::endl;
+			// std::cout << "b <- " << b << std::endl;
+			// std::cout << "main_chain[b].p " << main_chain[ b ].p << std::endl;
+			// std::cout << "S[b + main_chain[b].p] " << S [ b + main_chain [ b ].p ].integer << "\n\n";
+			insertion_index = INSERT ( *pairing , S , ( b + main_chain [ b ].p ) - 1 );
+			for ( size_t i = 0 ; i < main_chain.size() ; i++ )
+				if ( insertion_index <= ( i + main_chain [ i ].p ) )
+					main_chain [ i ].p++;
 			b--;
 			
 		}

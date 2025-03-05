@@ -6,7 +6,7 @@
 /*   By: yel-yaqi <yel-yaqi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/01 02:41:11 by yel-yaqi          #+#    #+#             */
-/*   Updated: 2025/03/03 15:28:32 by yel-yaqi         ###   ########.fr       */
+/*   Updated: 2025/03/05 15:32:19 by yel-yaqi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,31 +21,32 @@ int main(int argc, char **argv)
 {
 	std::deque < ATOM > X;
 
-	X.push_back ( (ATOM){ 0 , NULL } );
-	X.push_back ( (ATOM){ -9 , NULL } );
-	X.push_back ( (ATOM){ -9 , NULL } );
-	X.push_back ( (ATOM){ -9 , NULL } );
-	X.push_back ( (ATOM){ 2 , NULL } );
-	X.push_back ( (ATOM){ 77 , NULL } );
-	X.push_back ( (ATOM){ 8 , NULL } );
-	X.push_back ( (ATOM){ 33 , NULL } );
-	X.push_back ( (ATOM){ 52 , NULL } );
-	X.push_back ( (ATOM){ 7 , NULL } );
-	X.push_back ( (ATOM){ 6 , NULL } );
-	X.push_back ( (ATOM){ 5 , NULL } );
-	X.push_back ( (ATOM){ 1234 , NULL } );
-	X.push_back ( (ATOM){ -1234 , NULL } );
-	X.push_back ( (ATOM){ 12 , NULL } );
-	X.push_back ( (ATOM){ 18 , NULL } );
-	X.push_back ( (ATOM){ 22 , NULL } );
-	X.push_back ( (ATOM){ 34 , NULL } );
-	X.push_back ( (ATOM){ 43 , NULL } );
-	X.push_back ( (ATOM){ 55 , NULL } );
-	X.push_back ( (ATOM){ 97 , NULL } );
-	X.push_back ( (ATOM){ 28 , NULL } );
-	X.push_back ( (ATOM){ 4 , NULL } );
-	X.push_back ( (ATOM){ 4 , NULL } );
-	X.push_back ( (ATOM){ 4 , NULL } );
+	X.push_back ( (ATOM){ 0 , 0 , NULL } );
+	X.push_back ( (ATOM){ 3 , 0 , NULL } );
+	X.push_back ( (ATOM){ 2 , 0 , NULL } );
+	X.push_back ( (ATOM){ 1 , 0 , NULL } );
+	X.push_back ( (ATOM){ 4 , 0 , NULL } );
+	X.push_back ( (ATOM){ 5 , 0 , NULL } );
+	X.push_back ( (ATOM){ 6 , 0 , NULL } );
+	X.push_back ( (ATOM){ 33 , 0 , NULL } );
+	X.push_back ( (ATOM){ 52 , 0 , NULL } );
+	X.push_back ( (ATOM){ 7 , 0 , NULL } );
+	X.push_back ( (ATOM){ 6 , 0 , NULL } );
+	X.push_back ( (ATOM){ 9 , 0 , NULL } );
+	X.push_back ( (ATOM){ 5 , 0 , NULL } );
+	X.push_back ( (ATOM){ 1234 , 0 , NULL } );
+	X.push_back ( (ATOM){ -1234 , 0 , NULL } );
+	X.push_back ( (ATOM){ 12 , 0 , NULL } );
+	X.push_back ( (ATOM){ 18 , 0 , NULL } );
+	X.push_back ( (ATOM){ 22 , 0 , NULL } );
+	X.push_back ( (ATOM){ 34 , 0 , NULL } );
+	X.push_back ( (ATOM){ 43 , 0 , NULL } );
+	X.push_back ( (ATOM){ 55 , 0 , NULL } );
+	X.push_back ( (ATOM){ 97 , 0 , NULL } );
+	X.push_back ( (ATOM){ 28 , 0 , NULL } );
+	X.push_back ( (ATOM){ 4 , 0 , NULL } );
+	X.push_back ( (ATOM){ 4 , 0 , NULL } );
+	X.push_back ( (ATOM){ 4 , 0 , NULL } );
 
 	std::deque < ATOM > S;
 
