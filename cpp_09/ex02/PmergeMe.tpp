@@ -6,7 +6,7 @@
 /*   By: yel-yaqi <yel-yaqi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/01 02:42:28 by yel-yaqi          #+#    #+#             */
-/*   Updated: 2025/03/05 15:58:39 by yel-yaqi         ###   ########.fr       */
+/*   Updated: 2025/03/05 17:53:25 by yel-yaqi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -233,5 +233,4 @@ void merge_insertion ( T& container , T& S , int R )
 	ATOM *a1_pairing = pair_chain_lookup ( S[ 0 ] , R );
 	S.insert ( S.begin() , *a1_pairing );
 	insert ( container , S , R );
-	
-}
+ }

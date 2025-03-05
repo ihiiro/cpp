@@ -6,7 +6,7 @@
 /*   By: yel-yaqi <yel-yaqi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/01 02:41:11 by yel-yaqi          #+#    #+#             */
-/*   Updated: 2025/03/05 17:14:58 by yel-yaqi         ###   ########.fr       */
+/*   Updated: 2025/03/05 20:08:57 by yel-yaqi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,11 +29,15 @@
 
 int main(int argc, char **argv)
 {
-
+	
 	std::vector < ATOM > X_vector, S_vector;
 	std::deque < ATOM > X_deque, S_deque;
+	long integer = 0;
+	size_t digit_length = 0;
+	long pow = 1e9;
+	ATOM element;
 
-	if ( argc < 3 )
+	if ( argc < 2 )
 	{
 
 		std::cerr << "ERROR: usage ./PmergeMe A B ..." << std::endl;
@@ -49,10 +53,88 @@ int main(int argc, char **argv)
 		
 	}
 
-	
+	for ( int i = 1 ; i < argc ; i++ )
+	{
+		
+		if ( argv [ i ] == NULL )
+		{
 
+			std::cerr << "ERROR: FATAL: NULL POINTER" << std::endl;
+			return 1;
+
+		}
+
+		
+
+		for ( int j = 0 ; argv [ i ][ j ] != '\0' ; j++ )
+		{
+
+			if ( argv [ i ][ j ] >= '0' and argv [ i ][ j ] <= '9' )
+			{
+				
+				integer += ( argv [ i ][ j ] - '0' ) * pow;
+				pow /= 10;
+				digit_length++;
+				if ( argv [ i ][ j + 1 ] == '\0' or argv [ i ][ j + 1 ] == ' ' )
+				{
+
+					if ( pow > 0 )
+						integer /= pow * 10;
+					if ( digit_length > 10 or integer > INT32_MAX )
+					{
+
+						std::cerr << "ERROR: not a positive 32-bit signed integer" << std::endl;
+						return 1;
+
+					}
+					element.integer = integer;
+					element.p = 0;
+					element.pair_chain = NULL;
+					X_vector.push_back ( element );
+					X_deque.push_back ( element );
+					pow = 1e9;
+					integer = 0;
+					digit_length = 0;
+
+				}
+
+			}
+			else if ( argv [ i ][ j ] == ' ' )
+				continue;
+			else
+			{
+				
+				std::cerr << "ERROR: not a digit/space" << std::endl;
+				return 1;
+
+			}
+
+		}
+		
+	}
+
+	if ( X_deque.size() > 1e6 or X_vector.size() > 1e6 )
+	{
+		std::cerr << "ERROR: maximum number of elements is 1,000,000" << std::endl;
+		return 1;
+	}
+	merge_insertion < std::deque<ATOM> > ( X_deque , S_deque , 1 );
+
+	std::cout << "UNSORTED" << std::endl;
+	for ( size_t i = 0 ; i < X_deque.size() ; i++ )
+		std::cout << "[" << X_deque [ i ].integer << "]";
+	std::cout << std::endl;
+
+	std::cout << "SORTED" << std::endl;
+	for ( size_t i = 0 ; i < S_deque.size() ; i++ )
+		std::cout << "[" << S_deque [ i ].integer << "]";
+	std::cout << std::endl;
+
+	// merge_insertion < std::deque<ATOM> > ( X_deque , S_deque , 1 );
 	
-	// merge_insertion < std::vector<ATOM> > ( X_vector , S_ , 1 );
+	// for ( size_t i = 0 ; i < S_deque.size() ; i++ )
+	// 	std::cout << S_deque [ i ].integer << " ";
+	// std::cout << std::endl;
 
 	return 0;
 	
