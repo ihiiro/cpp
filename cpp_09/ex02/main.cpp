@@ -6,7 +6,7 @@
 /*   By: yel-yaqi <yel-yaqi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/01 02:41:11 by yel-yaqi          #+#    #+#             */
-/*   Updated: 2025/03/05 20:08:57 by yel-yaqi         ###   ########.fr       */
+/*   Updated: 2025/03/05 23:26:14 by yel-yaqi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,8 @@
 #include <vector>
 
 #include <deque>
+
+#include <ctime>
 
 /*
 
@@ -32,6 +34,8 @@ int main(int argc, char **argv)
 	
 	std::vector < ATOM > X_vector, S_vector;
 	std::deque < ATOM > X_deque, S_deque;
+	std::clock_t start, end;
+	double us;
 	long integer = 0;
 	size_t digit_length = 0;
 	long pow = 1e9;
@@ -118,26 +122,32 @@ int main(int argc, char **argv)
 		std::cerr << "ERROR: maximum number of elements is 1,000,000" << std::endl;
 		return 1;
 	}
+	start = std::clock();
 	merge_insertion < std::deque<ATOM> > ( X_deque , S_deque , 1 );
+	end = std::clock();
+	us = double(end - start) / CLOCKS_PER_SEC * 1e6;
 
-	std::cout << "UNSORTED" << std::endl;
+	std::cout << "UNSORTED <- ";
 	for ( size_t i = 0 ; i < X_deque.size() ; i++ )
 		std::cout << "[" << X_deque [ i ].integer << "]";
 	std::cout << std::endl;
 
-	std::cout << "SORTED" << std::endl;
+	std::cout << "SORTED <- ";
 	for ( size_t i = 0 ; i < S_deque.size() ; i++ )
 		std::cout << "[" << S_deque [ i ].integer << "]";
 	std::cout << std::endl;
 
-	// merge_insertion < std::deque<ATOM> > ( X_deque , S_deque , 1 );
-	
-	// for ( size_t i = 0 ; i < S_deque.size() ; i++ )
-	// 	std::cout << S_deque [ i ].integer << " ";
-	// std::cout << std::endl;
+	std::cout << "using deque <- " << us << " us" << std::endl;
+
+	start = std::clock();
+	merge_insertion < std::vector<ATOM> > ( X_vector , S_vector , 1 );
+	end = std::clock();
+	us = double(end - start) / CLOCKS_PER_SEC * 1e6;
+	std::cout << "using vector <- " << us << " us" << std::endl;
 
 	return 0;
 	
 }
 
 #include "PmergeMe.tpp"
+	
